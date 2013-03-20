@@ -1,0 +1,6 @@
+<RCC>
+<qresource>
+    <file>res/images/logo.png</file>
+    <file>res/language/qt_zh_CN.qm</file>
+</qresource>
+</RCC>

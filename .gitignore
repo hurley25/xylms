@@ -7,6 +7,11 @@
 *.so
 *.dylib
 
+# Program Files
+Makefile
+moc_*
+xylms
+
 # Compiled Static libraries
 *.lai
 *.la
