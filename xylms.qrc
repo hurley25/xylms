@@ -6,6 +6,7 @@
     <file>res/images/set.png</file>
     <file>res/images/about.png</file>
     <file>res/images/exit.png</file>
+    <file>res/images/logo.png</file>
     <file>res/language/qt_zh_CN.qm</file>
 </qresource>
 </RCC>
