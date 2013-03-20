@@ -25,10 +25,6 @@ MainWindow::MainWindow()
 	createToolBars();
 	createStatusBar();
 	readSettings();
-	
-	this->resize(1000, 650);
-	setWindowIcon(QIcon(":/res/images/logo.png"));
-	setWindowTitle(tr("xiyoulinux 成员管理系统"));
 }
 
 MainWindow::~MainWindow()
@@ -52,13 +48,15 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::about()
 {
 	QMessageBox::about(this, tr("关于"),
-			tr("<h2>xiyoulinux 成员管理系统</h2>"
-			"<p>Copyright (C) 2013 xiyoulinux 版权所有，保留一切权利。"));
+			tr("<h2>Xiyou Linux Group 成员管理系统</h2>"
+			"<p>Copyright (C) 2013 Xiyou Linux Group 版权所有，保留一切权利。"));
 }
 
 void MainWindow::createMainWeiget()
 {
-
+	this->resize(1000, 650);
+	setWindowIcon(QIcon(":/res/images/logo.png"));
+	setWindowTitle(tr("Xiyou Linux Group 成员管理系统"));
 }
 
 void MainWindow::createActions()
