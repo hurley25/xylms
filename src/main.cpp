@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 	MainWindow *mainwindow = new MainWindow;
 
 	mainwindow->sleep(1000);
-	mainwindow->showMaximized();
+	mainwindow->show();
 
 	splash->finish(mainwindow);
 	delete splash;
