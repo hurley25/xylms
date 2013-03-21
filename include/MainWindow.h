@@ -39,12 +39,15 @@ protected:
 	void createMainWeiget();		// 创建主窗口控件
 	void createActions();			// 创建动作
 	void createToolBars();			// 创建工具栏
+	void createManageToolBars(); 		// 创建管理工具栏
+	void removeManageToolBars(); 		// 移除管理工具栏
 	void createStatusBar();			// 创建状态栏
 	
 	void readSettings();			// 读取配置
 	void writeSettings();			// 写入配置
 
 private slots:
+	void proving();
 	void about();
 
 private:

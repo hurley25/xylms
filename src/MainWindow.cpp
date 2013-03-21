@@ -45,6 +45,19 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	}
 }
 
+void MainWindow::proving()
+{
+	static bool isRoot = false;
+	
+	if (isRoot == false) {
+		isRoot = true;
+		createManageToolBars();
+	} else {
+		isRoot = false;
+		removeManageToolBars();
+	}
+}
+
 void MainWindow::about()
 {
 	QMessageBox::about(this, tr("关于"),
@@ -72,9 +85,9 @@ void MainWindow::createActions()
 	//connect(gradeAction, SIGNAL(triggered()), this, SLOT(grade()));
 	
 	provingAction = new QAction(tr("管理登陆"), this);
-	provingAction->setIcon(QIcon(":/res/images/proving.png"));
+	provingAction->setIcon(QIcon(":/res/images/proving_in.png"));
 	provingAction->setStatusTip(tr("超级管理员登陆"));
-	//connect(provingAction, SIGNAL(triggered()), this, SLOT(proving()));
+	connect(provingAction, SIGNAL(triggered()), this, SLOT(proving()));
 	
 	manageAction = new QAction(tr("成员管理"), this);
 	manageAction->setIcon(QIcon(":/res/images/manage.png"));
@@ -106,14 +119,30 @@ void MainWindow::createToolBars()
 
 	seniorToolBar = addToolBar(tr("高级工具"));
 	seniorToolBar->setIconSize(QSize(60, 70));
-	//seniorToolBar->addAction(provingAction);
-	seniorToolBar->addAction(manageAction);
-	seniorToolBar->addAction(setAction);
+	seniorToolBar->addAction(provingAction);
 
 	infoToolBar = addToolBar(tr("关于信息"));
 	infoToolBar->setIconSize(QSize(60, 70));
 	infoToolBar->addAction(aboutAction);
 	infoToolBar->addAction(exitAction);
+}
+
+void MainWindow::createManageToolBars()
+{
+	provingAction->setIcon(QIcon(":/res/images/proving_out.png"));
+	provingAction->setStatusTip(tr("超级管理员登出"));
+	
+	seniorToolBar->addAction(manageAction);
+	seniorToolBar->addAction(setAction);
+}
+
+void MainWindow::removeManageToolBars()
+{
+	provingAction->setIcon(QIcon(":/res/images/proving_in.png"));
+	provingAction->setStatusTip(tr("超级管理员登陆"));
+	
+	seniorToolBar->removeAction(manageAction);
+	seniorToolBar->removeAction(setAction);
 }
 
 void MainWindow::createStatusBar()
