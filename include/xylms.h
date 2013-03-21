@@ -21,6 +21,6 @@
 void xyl_sleep(unsigned int msec);
 
 //  连接数据库
-bool xly_create_connect();
+bool xyl_create_connect();
 
 #endif // XYLMS_H_

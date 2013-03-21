@@ -19,14 +19,30 @@
 
 #include <QWidget>
 
+class QTableView;
+class QSqlTableModel;
+class QPushButton;
+class QHBoxLayout;
+class QVBoxLayout;
+
 class NewJoinWidget : public QWidget
 {
+	Q_OBJECT
+
 public:
 	NewJoinWidget();
 	~NewJoinWidget();
 
 private:
-
+	QTableView *tableView;
+	QSqlTableModel *sqlModel; 
+		
+	QPushButton *addButton;
+	QPushButton *changeButton;
+	QPushButton *delButton;
+	QPushButton *refreshButton;
+	QVBoxLayout *rightLayout;
+	QHBoxLayout *mainLayout;
 };
 
 #endif // NEWJOINWIDGET_H_

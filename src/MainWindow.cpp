@@ -100,7 +100,7 @@ void MainWindow::createActions()
 	newJoinAction = new QAction(tr("新人录入"), this);
 	newJoinAction->setIcon(QIcon(":/res/images/newJoin.png"));
 	newJoinAction->setStatusTip(tr("新成员的录入"));
-	//connect(newJoinAction, SIGNAL(triggered()), this, SLOT(newJoin()));
+	connect(newJoinAction, SIGNAL(triggered()), stackedWidget, SLOT(setCurrentRow(0)));
 
 	gradeAction = new QAction(tr("面试打分"), this);
 	gradeAction->setIcon(QIcon(":/res/images/grade.png"));

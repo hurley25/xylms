@@ -42,6 +42,10 @@ int main(int argc, char *argv[])
 	splash->setPixmap(QPixmap(":/res/images/logo.png"));
 	splash->show();
 
+	if (!xyl_create_connect()) {
+		return 1;
+	}
+
 	MainWindow *mainwindow = new MainWindow;
 
 	xyl_sleep(1000);

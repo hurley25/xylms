@@ -30,5 +30,18 @@ void xyl_sleep(unsigned int msec)
 
 bool xyl_create_connect()
 {
+	QSqlDatabase db  = QSqlDatabase::addDatabase("QMYSQL");
 
+	db.setHostName("localhost");
+	db.setDatabaseName("xiyoulinux");
+	db.setUserName("root");
+	db.setPassword("610424763x");
+
+	if (!db.open()) {
+		QMessageBox::critical(0, QObject::tr("连接数据库错误"), db.lastError().text());
+		return false;
+	}
+	
+	return true;
 }
+

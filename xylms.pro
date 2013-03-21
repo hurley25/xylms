@@ -22,7 +22,7 @@ QT += sql
 # Input
 
 HEADERS +=  include/MainWindow.h include/StackedWidget.h include/xylms.h \
-		include/NewJoinWidget.h include/GradeWidget.h include/ManageWidget.h include/SetWidget.h
+		include/NewJoinWidget.h include/GradeWidget.h include/ManageWidget.h include/SetWidget.h 
 
 SOURCES +=  src/main.cpp src/MainWindow.cpp src/StackedWidget.cpp src/xylms.cpp \
 		src/NewJoinWidget.cpp src/GradeWidget.cpp src/ManageWidget.cpp src/SetWidget.cpp
