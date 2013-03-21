@@ -19,9 +19,9 @@ INCLUDEPATH += include
 
 # Input
 
-HEADERS +=  include/MainWindow.h
+HEADERS +=  include/MainWindow.h include/StackedWidget.h
 
-SOURCES +=  src/main.cpp src/MainWindow.cpp
+SOURCES +=  src/main.cpp src/MainWindow.cpp src/StackedWidget.cpp
 
 FORMS += 
 

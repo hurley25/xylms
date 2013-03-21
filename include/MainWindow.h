@@ -22,6 +22,7 @@
 class QLabel;
 class QToolBar;
 class QAction;
+class StackedWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -51,6 +52,8 @@ private slots:
 	void about();
 
 private:
+	StackedWidget *stackedWidget; 		// 主窗口控件
+
 	QLabel *statusLabel;			// 状态栏文本					
 
 	QToolBar *generalToolBar;		// 普通操作相关工具栏指针

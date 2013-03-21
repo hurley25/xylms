@@ -17,6 +17,7 @@
 #include <QtGui>
 
 #include "MainWindow.h"
+#include "StackedWidget.h"
 
 MainWindow::MainWindow()
 {
@@ -86,7 +87,10 @@ void MainWindow::about()
 
 void MainWindow::createMainWeiget()
 {
-	this->resize(1000, 650);
+	stackedWidget = new StackedWidget();
+	
+	resize(1000, 650);
+	setCentralWidget(stackedWidget);
 	setWindowIcon(QIcon(":/res/images/logo.png"));
 	setWindowTitle(tr("Xiyou Linux Group 成员管理系统"));
 }
