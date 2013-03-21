@@ -48,10 +48,29 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::proving()
 {
 	static bool isRoot = false;
+	static int inputCount;
+	QString passwdRoot("123456");
 	
 	if (isRoot == false) {
-		isRoot = true;
-		createManageToolBars();
+
+		// TODO 从数据库验证密码
+		bool isInput;
+		QString passwdInput = QInputDialog::getText(this, tr("管理员登陆"), 
+					tr("请输入管理员密码："), QLineEdit::Password, NULL, &isInput);
+		if (isInput) {
+			if (passwdInput == passwdRoot) {
+				isRoot = true;
+				createManageToolBars();
+			} else {
+				if (++inputCount >= 3) {
+					QMessageBox::warning(this, tr("警告"),
+							tr("请不要多次尝试管理员密码，这会让组长同志很不开心。"));
+				} else {
+					QMessageBox::question(this, tr("密码错误"), 
+							tr("您输入的密码有误，忘记了吗？"));
+				}
+			}
+		} 
 	} else {
 		isRoot = false;
 		removeManageToolBars();
