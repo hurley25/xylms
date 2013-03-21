@@ -10,6 +10,8 @@
 # Program Files
 Makefile
 moc_*
+qrc_*
+tags
 xylms
 
 # Compiled Static libraries

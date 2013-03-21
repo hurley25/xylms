@@ -19,6 +19,11 @@
 
 #include <QStackedWidget>
 
+class NewJoinWidget;
+class GradeWidget;
+class ManageWidget;
+class SetWidget;
+
 class StackedWidget : public QStackedWidget
 {
 	Q_OBJECT
@@ -28,7 +33,10 @@ public:
 	~StackedWidget();
 	
 private:
-	
+	NewJoinWidget *newJoinWidget;
+	GradeWidget   *gradeWidget;
+	ManageWidget  *manageWidget;
+	SetWidget     *setWidget;
 };
 
 #endif // STACKWIDGET_H_

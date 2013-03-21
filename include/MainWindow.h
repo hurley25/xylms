@@ -32,8 +32,6 @@ public:
 	MainWindow();
 	~MainWindow();
 
-	void sleep(unsigned int msec); 		// 延时函数
-
 protected:
 	void closeEvent(QCloseEvent *event);
 

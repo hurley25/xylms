@@ -14,11 +14,25 @@
 // 
 // =====================================================================================
 
+#include <QtGui>
+
 #include "StackedWidget.h"
+#include "NewJoinWidget.h"
+#include "GradeWidget.h"
+#include "ManageWidget.h"
+#include "SetWidget.h"
 
 StackedWidget::StackedWidget()
 {
-
+	newJoinWidget = new NewJoinWidget();
+	gradeWidget   = new GradeWidget();
+	manageWidget  = new ManageWidget();
+	setWidget     = new SetWidget();
+	
+	this->addWidget(newJoinWidget);
+	this->addWidget(gradeWidget);
+	this->addWidget(manageWidget);
+	this->addWidget(setWidget);
 }
 
 StackedWidget::~StackedWidget()

@@ -15,7 +15,9 @@
 // =====================================================================================
 
 #include <QtGui>
+
 #include "MainWindow.h"
+#include "xylms.h"
 
 int main(int argc, char *argv[])
 {
@@ -42,7 +44,8 @@ int main(int argc, char *argv[])
 
 	MainWindow *mainwindow = new MainWindow;
 
-	mainwindow->sleep(1000);
+	xyl_sleep(1000);
+
 	mainwindow->show();
 
 	splash->finish(mainwindow);
