@@ -46,6 +46,7 @@ protected:
 	void writeSettings();			// 写入配置
 
 private slots:
+	void newJoin();
 	void proving();
 	void about();
 
