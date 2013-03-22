@@ -19,8 +19,9 @@
 
 #include <QWidget>
 
-class QTableView;
-class QSqlTableModel;
+class QTreeView;
+class QHeaderView;
+class SqlTableModel;
 class QPushButton;
 class QHBoxLayout;
 class QVBoxLayout;
@@ -33,9 +34,13 @@ public:
 	NewJoinWidget();
 	~NewJoinWidget();
 
+public slots:
+	void refresh();
+
 private:
-	QTableView *tableView;
-	QSqlTableModel *sqlModel; 
+	QTreeView *treeView;
+	QHeaderView *headView;
+	SqlTableModel *sqlModel; 
 		
 	QPushButton *addButton;
 	QPushButton *changeButton;

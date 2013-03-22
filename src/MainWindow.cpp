@@ -94,7 +94,7 @@ void MainWindow::createMainWeiget()
 {
 	stackedWidget = new StackedWidget();
 	
-	resize(1000, 650);
+	resize(1100, 650);
 	setCentralWidget(stackedWidget);
 	setWindowIcon(QIcon(":/res/images/logo.png"));
 	setWindowTitle(tr("Xiyou Linux Group 成员管理系统"));

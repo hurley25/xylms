@@ -41,16 +41,22 @@ int main(int argc, char *argv[])
 
 	splash->setPixmap(QPixmap(":/res/images/logo.png"));
 	splash->show();
-
-	if (!xyl_create_connect()) {
+	
+	// 连接数据库，失败则不启动程序
+	if (!createConnect()) {
 		return 1;
 	}
 
 	MainWindow *mainwindow = new MainWindow;
-
-	xyl_sleep(1000);
+	
+	// sleep 1 s 只是为了显示启动画面...
+	Sleep(1000);
 
 	mainwindow->show();
+	
+	// 窗口显示在屏幕正中间
+	mainwindow->move((QApplication::desktop()->width() - mainwindow->width()) >> 1,
+				(QApplication::desktop()->height() - mainwindow->height()) >> 1);
 
 	splash->finish(mainwindow);
 	delete splash;

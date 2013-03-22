@@ -19,7 +19,7 @@
 
 #include "xylms.h"
 
-void xyl_sleep(unsigned int msec)
+void Sleep(unsigned int msec)
 {
 	QTime dieTime = QTime::currentTime().addMSecs(msec);
 
@@ -28,7 +28,7 @@ void xyl_sleep(unsigned int msec)
 	}
 }
 
-bool xyl_create_connect()
+bool createConnect()
 {
 	QSqlDatabase db  = QSqlDatabase::addDatabase("QMYSQL");
 

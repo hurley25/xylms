@@ -18,9 +18,9 @@
 #define XYLMS_H_
 
 // 延时函数
-void xyl_sleep(unsigned int msec);
+void Sleep(unsigned int msec);
 
 //  连接数据库
-bool xyl_create_connect();
+bool createConnect();
 
 #endif // XYLMS_H_
