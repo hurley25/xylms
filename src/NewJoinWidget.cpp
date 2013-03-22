@@ -57,8 +57,16 @@ NewJoinWidget::NewJoinWidget()
 	treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	
 	stuComboBox = new QComboBox();
+	stuComboBox->addItem("2006级信息");
+	stuComboBox->addItem("2007级信息");
+	stuComboBox->addItem("2008级信息");
 	stuComboBox->addItem("2009级信息");
+	stuComboBox->addItem("2010级信息");
 	stuComboBox->addItem("2011级信息");
+	stuComboBox->addItem("2012级信息");
+
+	// TODO
+	stuComboBox->setCurrentIndex(3);
 	connect(stuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh()));
 	
 	stuLayout = new QVBoxLayout();

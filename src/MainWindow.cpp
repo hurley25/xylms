@@ -140,16 +140,19 @@ void MainWindow::createActions()
 void MainWindow::createToolBars()
 {
 	generalToolBar = addToolBar(tr("常规工具"));
-	generalToolBar->setIconSize(QSize(60, 70));
+	generalToolBar->setIconSize(QSize(60, 60));
+	generalToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 	generalToolBar->addAction(newJoinAction);
 	generalToolBar->addAction(gradeAction);
-
+	
 	seniorToolBar = addToolBar(tr("高级工具"));
-	seniorToolBar->setIconSize(QSize(60, 70));
+	seniorToolBar->setIconSize(QSize(60, 60));
+	seniorToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 	seniorToolBar->addAction(provingAction);
 
 	infoToolBar = addToolBar(tr("关于信息"));
-	infoToolBar->setIconSize(QSize(60, 70));
+	infoToolBar->setIconSize(QSize(60, 60));
+	infoToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 	infoToolBar->addAction(aboutAction);
 	infoToolBar->addAction(exitAction);
 }
