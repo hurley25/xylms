@@ -160,6 +160,7 @@ void MainWindow::createToolBars()
 void MainWindow::createManageToolBars()
 {
 	provingAction->setIcon(QIcon(":/res/images/proving_out.png"));
+	provingAction->setText(tr("管理登出"));
 	provingAction->setStatusTip(tr("超级管理员登出"));
 	
 	seniorToolBar->addAction(manageAction);
@@ -169,6 +170,7 @@ void MainWindow::createManageToolBars()
 void MainWindow::removeManageToolBars()
 {
 	provingAction->setIcon(QIcon(":/res/images/proving_in.png"));
+	provingAction->setText(tr("管理登陆"));
 	provingAction->setStatusTip(tr("超级管理员登陆"));
 	
 	seniorToolBar->removeAction(manageAction);
