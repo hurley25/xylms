@@ -39,21 +39,7 @@ NewJoinWidget::NewJoinWidget()
 {
 	sqlModel = new SqlTableModel();
 	sqlModel->setTable("stu_2009");
-	sqlModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-	
-	// 插入表头
-	sqlModel->setHeaderData(stu_id, Qt::Horizontal, tr("学号"));
-	sqlModel->setHeaderData(stu_name, Qt::Horizontal, tr("姓名"));
-	sqlModel->setHeaderData(stu_sex, Qt::Horizontal, tr("性别"));
-	sqlModel->setHeaderData(stu_class, Qt::Horizontal, tr("班级"));
-	sqlModel->setHeaderData(stu_birthday, Qt::Horizontal, tr("生日"));
-	sqlModel->setHeaderData(stu_qq, Qt::Horizontal, tr("QQ"));
-	sqlModel->setHeaderData(stu_phone1, Qt::Horizontal, tr("手机1"));
-	sqlModel->setHeaderData(stu_phone2, Qt::Horizontal, tr("手机2"));
-	sqlModel->setHeaderData(stu_mail, Qt::Horizontal, tr("邮箱"));
-	sqlModel->setHeaderData(stu_blog, Qt::Horizontal, tr("博客"));
-	sqlModel->setHeaderData(stu_where_to_go, Qt::Horizontal, tr("去向"));
-	sqlModel->setHeaderData(stu_other_info, Qt::Horizontal, tr("备注信息"));
+	createSqlTableModel();
 	sqlModel->select();
 	
 	// 设置表头居中对齐
@@ -69,6 +55,17 @@ NewJoinWidget::NewJoinWidget()
 	
 	// 不允许用户编辑数据
 	treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	
+	stuComboBox = new QComboBox();
+	stuComboBox->addItem("2009级信息");
+	stuComboBox->addItem("2011级信息");
+	connect(stuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh()));
+	
+	stuLayout = new QVBoxLayout();
+	stuLayout->addWidget(stuComboBox);
+
+	stuGroupBox = new QGroupBox(tr("当前显示"));
+	stuGroupBox->setLayout(stuLayout);
 
 	addButton = new QPushButton(tr("增加成员"));
 	changeButton = new QPushButton(tr("修改选中"));
@@ -76,11 +73,22 @@ NewJoinWidget::NewJoinWidget()
 	refreshButton = new QPushButton(tr("刷新数据"));
 	connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
 
+	buttonLayout = new QVBoxLayout();
+	buttonLayout->addWidget(addButton);
+	buttonLayout->addStretch();
+	buttonLayout->addWidget(changeButton);
+	buttonLayout->addStretch();
+	buttonLayout->addWidget(delButton);
+	buttonLayout->addStretch();
+	buttonLayout->addWidget(refreshButton);
+
+	buttonGroupBox = new QGroupBox(tr("数据操作"));
+	buttonGroupBox->setLayout(buttonLayout);
+
 	rightLayout = new QVBoxLayout();
-	rightLayout->addWidget(addButton);
-	rightLayout->addWidget(changeButton);
-	rightLayout->addWidget(delButton);
-	rightLayout->addWidget(refreshButton);
+	rightLayout->addWidget(stuGroupBox);
+	rightLayout->addStretch();
+	rightLayout->addWidget(buttonGroupBox);
 
 	mainLayout = new QHBoxLayout();
 	mainLayout->addWidget(treeView);
@@ -89,8 +97,38 @@ NewJoinWidget::NewJoinWidget()
 	this->setLayout(mainLayout);
 }
 
+void NewJoinWidget::createSqlTableModel()
+{
+	sqlModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+	
+	// 插入表头
+	sqlModel->setHeaderData(stu_id, Qt::Horizontal, tr("学号"));
+	sqlModel->setHeaderData(stu_name, Qt::Horizontal, tr("姓名"));
+	sqlModel->setHeaderData(stu_sex, Qt::Horizontal, tr("性别"));
+	sqlModel->setHeaderData(stu_class, Qt::Horizontal, tr("班级"));
+	sqlModel->setHeaderData(stu_birthday, Qt::Horizontal, tr("生日"));
+	sqlModel->setHeaderData(stu_qq, Qt::Horizontal, tr("QQ"));
+	sqlModel->setHeaderData(stu_phone1, Qt::Horizontal, tr("手机1"));
+	sqlModel->setHeaderData(stu_phone2, Qt::Horizontal, tr("手机2"));
+	sqlModel->setHeaderData(stu_mail, Qt::Horizontal, tr("邮箱"));
+	sqlModel->setHeaderData(stu_blog, Qt::Horizontal, tr("博客"));
+	sqlModel->setHeaderData(stu_where_to_go, Qt::Horizontal, tr("去向"));
+	sqlModel->setHeaderData(stu_other_info, Qt::Horizontal, tr("备注信息"));
+}
+
 void NewJoinWidget::refresh()
 {
+	QString strTableName("stu_");
+	QString strCombo = stuComboBox->currentText();
+	
+	// 这个语句在公元9999年以后可能会出 bug ... 
+	strTableName.append(strCombo.mid(0, 4));
+
+	//QTextStream cout(stdout, QIODevice::WriteOnly);
+	//cout << strTableName << endl;;
+	
+	sqlModel->setTable(strTableName);
+	createSqlTableModel();
 	sqlModel->select();
 }
 

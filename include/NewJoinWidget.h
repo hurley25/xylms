@@ -22,6 +22,8 @@
 class QTreeView;
 class QHeaderView;
 class SqlTableModel;
+class QGroupBox;
+class QComboBox;
 class QPushButton;
 class QHBoxLayout;
 class QVBoxLayout;
@@ -38,14 +40,25 @@ public slots:
 	void refresh();
 
 private:
+	void createSqlTableModel();
+
+private:
 	QTreeView *treeView;
 	QHeaderView *headView;
 	SqlTableModel *sqlModel; 
 		
+	QGroupBox   *stuGroupBox;	
+	QComboBox   *stuComboBox;
+	QVBoxLayout *stuLayout;
+
 	QPushButton *addButton;
 	QPushButton *changeButton;
 	QPushButton *delButton;
 	QPushButton *refreshButton;
+	
+	QGroupBox   *buttonGroupBox;
+	QVBoxLayout *buttonLayout;
+
 	QVBoxLayout *rightLayout;
 	QHBoxLayout *mainLayout;
 };
