@@ -19,6 +19,7 @@
 
 #include "NewJoinWidget.h"
 #include "SqlTableModel.h"
+#include "ChangeInfoDialog.h"
 
 enum {
 	stu_id          = 0,
@@ -38,7 +39,7 @@ enum {
 NewJoinWidget::NewJoinWidget()
 {
 	sqlModel = new SqlTableModel();
-	sqlModel->setTable("stu_2009");
+	sqlModel->setTable("stu_2006");
 	createSqlTableModel();
 	sqlModel->select();
 	
@@ -66,7 +67,7 @@ NewJoinWidget::NewJoinWidget()
 	stuComboBox->addItem("2012级信息");
 
 	// TODO
-	stuComboBox->setCurrentIndex(3);
+	stuComboBox->setCurrentIndex(0);
 	connect(stuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh()));
 	
 	stuLayout = new QVBoxLayout();
@@ -76,7 +77,9 @@ NewJoinWidget::NewJoinWidget()
 	stuGroupBox->setLayout(stuLayout);
 
 	addButton = new QPushButton(tr("增加成员"));
+	connect(addButton, SIGNAL(clicked()), this, SLOT(addInfo()));
 	changeButton = new QPushButton(tr("修改选中"));
+	connect(changeButton, SIGNAL(clicked()), this, SLOT(changeInfo()));
 	delButton = new QPushButton(tr("删除选中"));
 	refreshButton = new QPushButton(tr("刷新数据"));
 	connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
@@ -122,6 +125,20 @@ void NewJoinWidget::createSqlTableModel()
 	sqlModel->setHeaderData(stu_blog, Qt::Horizontal, tr("博客"));
 	sqlModel->setHeaderData(stu_where_to_go, Qt::Horizontal, tr("去向"));
 	sqlModel->setHeaderData(stu_other_info, Qt::Horizontal, tr("备注信息"));
+}
+
+void NewJoinWidget::addInfo()
+{
+	ChangeInfoDialog changeInfoDialog;
+	
+	changeInfoDialog.exec();
+}
+
+void NewJoinWidget::changeInfo()
+{
+	ChangeInfoDialog changeInfoDialog;
+	
+	changeInfoDialog.exec();
 }
 
 void NewJoinWidget::refresh()

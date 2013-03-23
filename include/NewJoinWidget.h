@@ -37,6 +37,8 @@ public:
 	~NewJoinWidget();
 
 public slots:
+	void addInfo();
+	void changeInfo();
 	void refresh();
 
 private:
