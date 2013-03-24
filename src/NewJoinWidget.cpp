@@ -233,5 +233,8 @@ void NewJoinWidget::refresh()
 	sqlModel->setTable(strTableName);
 	createSqlTableModel();
 	sqlModel->select();
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
 }
 
