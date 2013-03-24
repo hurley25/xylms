@@ -195,13 +195,20 @@ void NewJoinWidget::submitDataChange()
 
 void NewJoinWidget::addInfo()
 {
-	ChangeInfoDialog changeInfoDialog;
+	int rowNum = sqlModel->rowCount();	// 获得表的行数
+	sqlModel->insertRow(rowNum);		// 新插入行的位置就是表的行数，因为插入位置从 0 开始计算
+
+	ChangeInfoDialog changeInfoDialog(sqlModel, rowNum);
 	
 	if (changeInfoDialog.exec() == QDialog::QDialog::Rejected) {
 		return;
 	}
+	
+	changeRowInfo(changeInfoDialog, rowNum);
+	commitToDatabase();
 
-	// TODO
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
 }
 
 void NewJoinWidget::changeInfo()

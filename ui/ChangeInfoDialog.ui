@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>260</height>
+    <height>234</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,27 +23,27 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="0" column="1" colspan="2">
       <widget class="QLineEdit" name="idEdit"/>
      </item>
-     <item row="0" column="2">
+     <item row="0" column="3">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>姓名</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
+     <item row="0" column="4">
       <widget class="QLineEdit" name="nameEdit"/>
      </item>
-     <item row="0" column="4">
+     <item row="0" column="5">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>性别</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="5">
+     <item row="0" column="6">
       <widget class="QComboBox" name="sexComboBox">
        <item>
         <property name="text">
@@ -64,27 +64,27 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="1" column="1" colspan="2">
       <widget class="QLineEdit" name="classEdit"/>
      </item>
-     <item row="1" column="2">
+     <item row="1" column="3">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>生日</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
+     <item row="1" column="4">
       <widget class="QLineEdit" name="birthdayEdit"/>
      </item>
-     <item row="1" column="4">
+     <item row="1" column="5">
       <widget class="QLabel" name="label_6">
        <property name="text">
         <string>QQ</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="5">
+     <item row="1" column="6">
       <widget class="QLineEdit" name="qqEdit"/>
      </item>
      <item row="2" column="0">
@@ -94,17 +94,17 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="2" column="1" colspan="2">
       <widget class="QLineEdit" name="phone1Edit"/>
      </item>
-     <item row="2" column="2">
+     <item row="2" column="3">
       <widget class="QLabel" name="label_8">
        <property name="text">
         <string>手机2</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="3">
+     <item row="2" column="4">
       <widget class="QLineEdit" name="phone2Edit"/>
      </item>
      <item row="3" column="0">
@@ -114,53 +114,53 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="3" column="1" colspan="2">
       <widget class="QLineEdit" name="mailEdit"/>
      </item>
-     <item row="3" column="2">
+     <item row="3" column="3">
       <widget class="QLabel" name="label_10">
        <property name="text">
         <string>博客</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="3">
+     <item row="3" column="4">
       <widget class="QLineEdit" name="blogEdit"/>
      </item>
-     <item row="3" column="4">
+     <item row="3" column="5">
       <widget class="QLabel" name="label_11">
        <property name="text">
         <string>去向</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="5">
+     <item row="3" column="6">
       <widget class="QLineEdit" name="wheretogoEdit"/>
      </item>
-     <item row="4" column="0" colspan="2">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>备注信息</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" colspan="6">
-      <widget class="QLineEdit" name="otherinfoEdit">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="4" colspan="2">
+     <item row="5" column="5" colspan="2">
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="standardButtons">
         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>备注</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1" colspan="6">
+      <widget class="QLineEdit" name="otherinfoEdit">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
        </property>
       </widget>
      </item>

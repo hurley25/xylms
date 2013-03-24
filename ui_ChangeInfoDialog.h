@@ -51,15 +51,15 @@ public:
     QLineEdit *blogEdit;
     QLabel *label_11;
     QLineEdit *wheretogoEdit;
+    QDialogButtonBox *buttonBox;
     QLabel *label_12;
     QLineEdit *otherinfoEdit;
-    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *ChangeInfoDialog)
     {
         if (ChangeInfoDialog->objectName().isEmpty())
             ChangeInfoDialog->setObjectName(QString::fromUtf8("ChangeInfoDialog"));
-        ChangeInfoDialog->resize(620, 260);
+        ChangeInfoDialog->resize(620, 234);
         formLayout = new QFormLayout(ChangeInfoDialog);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         gridLayout = new QGridLayout();
@@ -72,27 +72,27 @@ public:
         idEdit = new QLineEdit(ChangeInfoDialog);
         idEdit->setObjectName(QString::fromUtf8("idEdit"));
 
-        gridLayout->addWidget(idEdit, 0, 1, 1, 1);
+        gridLayout->addWidget(idEdit, 0, 1, 1, 2);
 
         label_2 = new QLabel(ChangeInfoDialog);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        gridLayout->addWidget(label_2, 0, 2, 1, 1);
+        gridLayout->addWidget(label_2, 0, 3, 1, 1);
 
         nameEdit = new QLineEdit(ChangeInfoDialog);
         nameEdit->setObjectName(QString::fromUtf8("nameEdit"));
 
-        gridLayout->addWidget(nameEdit, 0, 3, 1, 1);
+        gridLayout->addWidget(nameEdit, 0, 4, 1, 1);
 
         label_3 = new QLabel(ChangeInfoDialog);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        gridLayout->addWidget(label_3, 0, 4, 1, 1);
+        gridLayout->addWidget(label_3, 0, 5, 1, 1);
 
         sexComboBox = new QComboBox(ChangeInfoDialog);
         sexComboBox->setObjectName(QString::fromUtf8("sexComboBox"));
 
-        gridLayout->addWidget(sexComboBox, 0, 5, 1, 1);
+        gridLayout->addWidget(sexComboBox, 0, 6, 1, 1);
 
         label_4 = new QLabel(ChangeInfoDialog);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -102,27 +102,27 @@ public:
         classEdit = new QLineEdit(ChangeInfoDialog);
         classEdit->setObjectName(QString::fromUtf8("classEdit"));
 
-        gridLayout->addWidget(classEdit, 1, 1, 1, 1);
+        gridLayout->addWidget(classEdit, 1, 1, 1, 2);
 
         label_5 = new QLabel(ChangeInfoDialog);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout->addWidget(label_5, 1, 2, 1, 1);
+        gridLayout->addWidget(label_5, 1, 3, 1, 1);
 
         birthdayEdit = new QLineEdit(ChangeInfoDialog);
         birthdayEdit->setObjectName(QString::fromUtf8("birthdayEdit"));
 
-        gridLayout->addWidget(birthdayEdit, 1, 3, 1, 1);
+        gridLayout->addWidget(birthdayEdit, 1, 4, 1, 1);
 
         label_6 = new QLabel(ChangeInfoDialog);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        gridLayout->addWidget(label_6, 1, 4, 1, 1);
+        gridLayout->addWidget(label_6, 1, 5, 1, 1);
 
         qqEdit = new QLineEdit(ChangeInfoDialog);
         qqEdit->setObjectName(QString::fromUtf8("qqEdit"));
 
-        gridLayout->addWidget(qqEdit, 1, 5, 1, 1);
+        gridLayout->addWidget(qqEdit, 1, 6, 1, 1);
 
         label_7 = new QLabel(ChangeInfoDialog);
         label_7->setObjectName(QString::fromUtf8("label_7"));
@@ -132,17 +132,17 @@ public:
         phone1Edit = new QLineEdit(ChangeInfoDialog);
         phone1Edit->setObjectName(QString::fromUtf8("phone1Edit"));
 
-        gridLayout->addWidget(phone1Edit, 2, 1, 1, 1);
+        gridLayout->addWidget(phone1Edit, 2, 1, 1, 2);
 
         label_8 = new QLabel(ChangeInfoDialog);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        gridLayout->addWidget(label_8, 2, 2, 1, 1);
+        gridLayout->addWidget(label_8, 2, 3, 1, 1);
 
         phone2Edit = new QLineEdit(ChangeInfoDialog);
         phone2Edit->setObjectName(QString::fromUtf8("phone2Edit"));
 
-        gridLayout->addWidget(phone2Edit, 2, 3, 1, 1);
+        gridLayout->addWidget(phone2Edit, 2, 4, 1, 1);
 
         label_9 = new QLabel(ChangeInfoDialog);
         label_9->setObjectName(QString::fromUtf8("label_9"));
@@ -152,45 +152,45 @@ public:
         mailEdit = new QLineEdit(ChangeInfoDialog);
         mailEdit->setObjectName(QString::fromUtf8("mailEdit"));
 
-        gridLayout->addWidget(mailEdit, 3, 1, 1, 1);
+        gridLayout->addWidget(mailEdit, 3, 1, 1, 2);
 
         label_10 = new QLabel(ChangeInfoDialog);
         label_10->setObjectName(QString::fromUtf8("label_10"));
 
-        gridLayout->addWidget(label_10, 3, 2, 1, 1);
+        gridLayout->addWidget(label_10, 3, 3, 1, 1);
 
         blogEdit = new QLineEdit(ChangeInfoDialog);
         blogEdit->setObjectName(QString::fromUtf8("blogEdit"));
 
-        gridLayout->addWidget(blogEdit, 3, 3, 1, 1);
+        gridLayout->addWidget(blogEdit, 3, 4, 1, 1);
 
         label_11 = new QLabel(ChangeInfoDialog);
         label_11->setObjectName(QString::fromUtf8("label_11"));
 
-        gridLayout->addWidget(label_11, 3, 4, 1, 1);
+        gridLayout->addWidget(label_11, 3, 5, 1, 1);
 
         wheretogoEdit = new QLineEdit(ChangeInfoDialog);
         wheretogoEdit->setObjectName(QString::fromUtf8("wheretogoEdit"));
 
-        gridLayout->addWidget(wheretogoEdit, 3, 5, 1, 1);
-
-        label_12 = new QLabel(ChangeInfoDialog);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-
-        gridLayout->addWidget(label_12, 4, 0, 1, 2);
-
-        otherinfoEdit = new QLineEdit(ChangeInfoDialog);
-        otherinfoEdit->setObjectName(QString::fromUtf8("otherinfoEdit"));
-        otherinfoEdit->setMinimumSize(QSize(0, 30));
-
-        gridLayout->addWidget(otherinfoEdit, 5, 0, 1, 6);
+        gridLayout->addWidget(wheretogoEdit, 3, 6, 1, 1);
 
         buttonBox = new QDialogButtonBox(ChangeInfoDialog);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
-        gridLayout->addWidget(buttonBox, 6, 4, 1, 2);
+        gridLayout->addWidget(buttonBox, 5, 5, 1, 2);
+
+        label_12 = new QLabel(ChangeInfoDialog);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout->addWidget(label_12, 4, 0, 1, 1);
+
+        otherinfoEdit = new QLineEdit(ChangeInfoDialog);
+        otherinfoEdit->setObjectName(QString::fromUtf8("otherinfoEdit"));
+        otherinfoEdit->setMinimumSize(QSize(0, 30));
+
+        gridLayout->addWidget(otherinfoEdit, 4, 1, 1, 6);
 
 
         formLayout->setLayout(0, QFormLayout::LabelRole, gridLayout);
@@ -222,7 +222,7 @@ public:
         label_9->setText(QApplication::translate("ChangeInfoDialog", "\351\202\256\347\256\261", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("ChangeInfoDialog", "\345\215\232\345\256\242", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("ChangeInfoDialog", "\345\216\273\345\220\221", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("ChangeInfoDialog", "\345\244\207\346\263\250\344\277\241\346\201\257", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("ChangeInfoDialog", "\345\244\207\346\263\250", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
