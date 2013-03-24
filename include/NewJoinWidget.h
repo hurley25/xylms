@@ -19,7 +19,7 @@
 
 #include <QWidget>
 
-class QTreeView;
+class QTableView;
 class QHeaderView;
 class SqlTableModel;
 class QGroupBox;
@@ -39,8 +39,7 @@ public:
 
 public slots:
 	void setSeniorButtonState(int flag);
-	void commitDataChange();
-	void restoreDataChange();
+	void submitDataChange();
 	void addInfo();
 	void changeInfo();
 	void refresh();
@@ -50,8 +49,7 @@ private:
 	void createSqlTableModel();
 
 private:
-	QTreeView *treeView;
-	QHeaderView *headView;
+	QTableView *view;
 	SqlTableModel *sqlModel; 
 	
 	// 浏览数据组
@@ -68,7 +66,7 @@ private:
 	QGroupBox   *seniorGroupBox;
 	QVBoxLayout *seniorLayout;
 	QCheckBox   *seniorCheckBox;
-	QPushButton *commitButton;
+	QPushButton *submitButton;
 	QPushButton *restoreButton;
 	
 	// 数据操作组

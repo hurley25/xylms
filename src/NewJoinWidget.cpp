@@ -44,23 +44,39 @@ NewJoinWidget::NewJoinWidget()
 	sqlModel->setTable("stu_2006");
 	createSqlTableModel();
 	sqlModel->select();
-	
-	// 设置表头居中对齐
-	headView = new QHeaderView(Qt::Horizontal);
-	headView->setDefaultAlignment(Qt::AlignHCenter);
-	// 设置根据内容大小自动调整大小
-	headView->setResizeMode(QHeaderView::ResizeToContents);
-	//headView->setResizeMode(QHeaderView::Interactive);
 
-	treeView = new QTreeView();
-	treeView->setModel(sqlModel);
-	treeView->setHeader(headView);
+	view = new QTableView();
+	view->setModel(sqlModel);
+
+	// 只允许单选
+	view->setSelectionMode(QAbstractItemView::SingleSelection);
+
+	// 每次选中一行
+	view->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
 	
 	// 默认不允许用户编辑数据
-	treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	view->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	
 	// 建立数据操作按钮
 	createUserItem();
+
+	// 组装主显示右侧的 Layout
+	rightLayout = new QVBoxLayout();
+	rightLayout->addWidget(stuGroupBox);
+	rightLayout->addStretch();
+	rightLayout->addWidget(seniorGroupBox);
+	rightLayout->addStretch();
+	rightLayout->addWidget(buttonGroupBox);
+	
+	// 组装主显示的 Layout
+	mainLayout = new QHBoxLayout();
+	mainLayout->addWidget(view);
+	mainLayout->addLayout(rightLayout);
+
+	this->setLayout(mainLayout);
 }
 
 NewJoinWidget::~NewJoinWidget()
@@ -91,20 +107,20 @@ void NewJoinWidget::createUserItem()
 	
 	seniorCheckBox = new QCheckBox(tr("启用自由编辑"));
 	connect(seniorCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeniorButtonState(int)));
-	commitButton = new QPushButton(tr("提交修改"));;
-	commitButton->setEnabled(false);	
-	connect(commitButton, SIGNAL(clicked()), this, SLOT(commitDataChange()));
+	submitButton = new QPushButton(tr("提交修改"));;
+	submitButton->setEnabled(false);
+	connect(submitButton, SIGNAL(clicked()), this, SLOT(submitDataChange()));
 	restoreButton = new QPushButton(tr("修改还原"));;
 	restoreButton->setEnabled(false);
-	connect(restoreButton, SIGNAL(clicked()), this, SLOT(restoreDataChange()));
+	connect(restoreButton, SIGNAL(clicked()), sqlModel, SLOT(revertAll()));
 
 	seniorLayout = new QVBoxLayout();
 	seniorLayout->addWidget(seniorCheckBox);
-	seniorLayout->addWidget(commitButton);
+	seniorLayout->addWidget(submitButton);
 	seniorLayout->addWidget(restoreButton);
 	
 	// TODO 组装高级操作选项的 GroupBox
-	seniorGroupBox = new QGroupBox(tr("高级操作"));
+	seniorGroupBox = new QGroupBox(tr("高级操作 [请谨慎]"));
 	seniorGroupBox->setLayout(seniorLayout);
 
 	addButton = new QPushButton(tr("增加成员"));
@@ -129,21 +145,6 @@ void NewJoinWidget::createUserItem()
 	// 组装数据操作 GroupBox
 	buttonGroupBox = new QGroupBox(tr("数据操作"));
 	buttonGroupBox->setLayout(buttonLayout);
-	
-	// 组装主显示右侧的 Layout
-	rightLayout = new QVBoxLayout();
-	rightLayout->addWidget(stuGroupBox);
-	rightLayout->addStretch();
-	rightLayout->addWidget(seniorGroupBox);
-	rightLayout->addStretch();
-	rightLayout->addWidget(buttonGroupBox);
-	
-	// 组装主显示的 Layout
-	mainLayout = new QHBoxLayout();
-	mainLayout->addWidget(treeView);
-	mainLayout->addLayout(rightLayout);
-
-	this->setLayout(mainLayout);
 }
 
 void NewJoinWidget::createSqlTableModel()
@@ -168,24 +169,40 @@ void NewJoinWidget::createSqlTableModel()
 void NewJoinWidget::setSeniorButtonState(int flag)
 {
 	if (flag == Qt::Checked) {
-		treeView->setEditTriggers(QAbstractItemView::DoubleClicked);
-		commitButton->setEnabled(true);
+		view->setEditTriggers(QAbstractItemView::DoubleClicked);
+		submitButton->setEnabled(true);
 		restoreButton->setEnabled(true);
 	} else {
-		treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-		commitButton->setEnabled(false);
+		view->setEditTriggers(QAbstractItemView::NoEditTriggers);
+		submitButton->setEnabled(false);
 		restoreButton->setEnabled(false);
 	}
 }
 
-void NewJoinWidget::commitDataChange()
+void NewJoinWidget::submitDataChange()
 {
+	int choose = QMessageBox::question(this, tr("数据提交确认"),
+                      	      tr("<H3>您确认要把当前数据表显示的数据提交到数据库吗？</H3>"
+					"</p><font color=red>* 注意此操作不可逆！</font>"),
+				QMessageBox::Yes | QMessageBox::No);
 
-}
+	if (choose == QMessageBox::No) {
+		return;
+	}
 
-void NewJoinWidget::restoreDataChange()
-{
+	// 采用事务的方式进行数据提交
+	sqlModel->database().transaction();
 
+	if (sqlModel->submitAll()) {
+		sqlModel->database().commit();	// 成功则提交数据
+		QMessageBox::information(this, tr("数据修改提交成功"),
+                              tr("当前表格显示数据修改已经成功同步到数据库。"));
+	} else {
+		sqlModel->database().rollback();	// 失败则回滚修改
+		QMessageBox::warning(this, tr("数据修改提交错误"),
+                              tr("数据库报告了一个错误: %1，本次所有修改已回滚，点击刷新按钮重置显示。")
+                              .arg(sqlModel->lastError().text()));
+	}
 }
 
 void NewJoinWidget::addInfo()
