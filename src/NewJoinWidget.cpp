@@ -221,7 +221,16 @@ void NewJoinWidget::changeInfo()
 	if (changeInfoDialog.exec() == QDialog::QDialog::Rejected) {
 		return;
 	}
+	
+	changeRowInfo(changeInfoDialog, rowNum);
+	commitToDatabase();
 
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
+}
+
+void NewJoinWidget::changeRowInfo(ChangeInfoDialog &changeInfoDialog, int rowNum)
+{
 	sqlModel->setData(sqlModel->index(rowNum, stu_id), QVariant(changeInfoDialog.idEdit->text()));
 	sqlModel->setData(sqlModel->index(rowNum, stu_name), QVariant(changeInfoDialog.nameEdit->text()));
 	sqlModel->setData(sqlModel->index(rowNum, stu_sex), 
@@ -234,12 +243,7 @@ void NewJoinWidget::changeInfo()
 	sqlModel->setData(sqlModel->index(rowNum, stu_mail), QVariant(changeInfoDialog.mailEdit->text()));
 	sqlModel->setData(sqlModel->index(rowNum, stu_blog), QVariant(changeInfoDialog.blogEdit->text()));
 	sqlModel->setData(sqlModel->index(rowNum, stu_where_to_go), QVariant(changeInfoDialog.wheretogoEdit->text()));
-//	sqlModel->setData(sqlModel->index(rowNum, stu_other_info), QVariant(changeInfoDialog.otherinfoEdit->text()));
-
-	commitToDatabase();
-
-	// 按照显示内容重新调整列宽度
-	view->resizeColumnsToContents();
+	sqlModel->setData(sqlModel->index(rowNum, stu_other_info), QVariant(changeInfoDialog.otherinfoEdit->text()));
 }
 
 void NewJoinWidget::delInfo()

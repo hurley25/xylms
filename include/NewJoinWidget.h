@@ -28,6 +28,7 @@ class QPushButton;
 class QHBoxLayout;
 class QVBoxLayout;
 class QCheckBox;
+class ChangeInfoDialog;
 
 class NewJoinWidget : public QWidget
 {
@@ -48,6 +49,7 @@ public slots:
 private:
 	void createUserItem();
 	void createSqlTableModel();
+	void changeRowInfo(ChangeInfoDialog &changeInfoDialog, int rowNum);
 	void commitToDatabase();
 
 private:

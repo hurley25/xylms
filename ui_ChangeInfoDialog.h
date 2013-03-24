@@ -21,7 +21,6 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
-#include <QtGui/QTextEdit>
 
 QT_BEGIN_NAMESPACE
 
@@ -39,6 +38,7 @@ public:
     QLabel *label_4;
     QLineEdit *classEdit;
     QLabel *label_5;
+    QLineEdit *birthdayEdit;
     QLabel *label_6;
     QLineEdit *qqEdit;
     QLabel *label_7;
@@ -52,15 +52,14 @@ public:
     QLabel *label_11;
     QLineEdit *wheretogoEdit;
     QLabel *label_12;
-    QTextEdit *otherinfoEdit;
+    QLineEdit *otherinfoEdit;
     QDialogButtonBox *buttonBox;
-    QLineEdit *birthdayEdit;
 
     void setupUi(QDialog *ChangeInfoDialog)
     {
         if (ChangeInfoDialog->objectName().isEmpty())
             ChangeInfoDialog->setObjectName(QString::fromUtf8("ChangeInfoDialog"));
-        ChangeInfoDialog->resize(620, 422);
+        ChangeInfoDialog->resize(620, 260);
         formLayout = new QFormLayout(ChangeInfoDialog);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         gridLayout = new QGridLayout();
@@ -109,6 +108,11 @@ public:
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         gridLayout->addWidget(label_5, 1, 2, 1, 1);
+
+        birthdayEdit = new QLineEdit(ChangeInfoDialog);
+        birthdayEdit->setObjectName(QString::fromUtf8("birthdayEdit"));
+
+        gridLayout->addWidget(birthdayEdit, 1, 3, 1, 1);
 
         label_6 = new QLabel(ChangeInfoDialog);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -175,8 +179,9 @@ public:
 
         gridLayout->addWidget(label_12, 4, 0, 1, 2);
 
-        otherinfoEdit = new QTextEdit(ChangeInfoDialog);
+        otherinfoEdit = new QLineEdit(ChangeInfoDialog);
         otherinfoEdit->setObjectName(QString::fromUtf8("otherinfoEdit"));
+        otherinfoEdit->setMinimumSize(QSize(0, 30));
 
         gridLayout->addWidget(otherinfoEdit, 5, 0, 1, 6);
 
@@ -186,11 +191,6 @@ public:
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
         gridLayout->addWidget(buttonBox, 6, 4, 1, 2);
-
-        birthdayEdit = new QLineEdit(ChangeInfoDialog);
-        birthdayEdit->setObjectName(QString::fromUtf8("birthdayEdit"));
-
-        gridLayout->addWidget(birthdayEdit, 1, 3, 1, 1);
 
 
         formLayout->setLayout(0, QFormLayout::LabelRole, gridLayout);
