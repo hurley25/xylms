@@ -110,7 +110,7 @@ void NewJoinWidget::createUserItem()
 	submitButton = new QPushButton(tr("提交修改"));;
 	submitButton->setEnabled(false);
 	connect(submitButton, SIGNAL(clicked()), this, SLOT(submitDataChange()));
-	restoreButton = new QPushButton(tr("修改还原"));;
+	restoreButton = new QPushButton(tr("撤销修改"));;
 	restoreButton->setEnabled(false);
 	connect(restoreButton, SIGNAL(clicked()), sqlModel, SLOT(revertAll()));
 
@@ -126,10 +126,9 @@ void NewJoinWidget::createUserItem()
 	addButton = new QPushButton(tr("增加成员"));
 	connect(addButton, SIGNAL(clicked()), this, SLOT(addInfo()));
 	changeButton = new QPushButton(tr("修改选中"));
-	changeButton->setEnabled(false);
 	connect(changeButton, SIGNAL(clicked()), this, SLOT(changeInfo()));
 	delButton = new QPushButton(tr("删除选中"));
-	delButton->setEnabled(false);
+	connect(delButton, SIGNAL(clicked()), this, SLOT(delInfo()));
 	refreshButton = new QPushButton(tr("刷新数据"));
 	connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
 
@@ -179,29 +178,32 @@ void NewJoinWidget::setSeniorButtonState(int flag)
 	}
 }
 
-void NewJoinWidget::submitDataChange()
+void NewJoinWidget::commitToDatabase()
 {
-	int choose = QMessageBox::question(this, tr("数据提交确认"),
-                      	      tr("<H3>您确认要把当前数据表显示的数据提交到数据库吗？</H3>"
-					"</p><font color=red>* 注意此操作不可逆！</font>"),
-				QMessageBox::Yes | QMessageBox::No);
-
-	if (choose == QMessageBox::No) {
-		return;
-	}
-
 	// 采用事务的方式进行数据提交
 	sqlModel->database().transaction();
 
 	if (sqlModel->submitAll()) {
 		sqlModel->database().commit();	// 成功则提交数据
 		QMessageBox::information(this, tr("数据修改提交成功"),
-                              tr("当前表格显示数据修改已经成功同步到数据库。"));
+                              tr("修改已经成功同步到数据库。"));
 	} else {
 		sqlModel->database().rollback();	// 失败则回滚修改
 		QMessageBox::warning(this, tr("数据修改提交错误"),
                               tr("数据库报告了一个错误: %1，本次所有修改已回滚，点击刷新按钮重置显示。")
                               .arg(sqlModel->lastError().text()));
+	}
+}
+
+void NewJoinWidget::submitDataChange()
+{
+	int choose = QMessageBox::question(this, tr("数据提交确认"),
+                      	      tr("<H3>您确认要把当前数据表显示的数据提交到数据库吗？</H3>"
+					"<p><font color=red>* 注意此操作不可逆！</font>"),
+				QMessageBox::Yes | QMessageBox::No);
+
+	if (choose == QMessageBox::Yes) {
+		commitToDatabase();
 	}
 }
 
@@ -217,6 +219,27 @@ void NewJoinWidget::changeInfo()
 	ChangeInfoDialog changeInfoDialog;
 	
 	changeInfoDialog.exec();
+}
+
+void NewJoinWidget::delInfo()
+{
+	int flag = view->currentIndex().column();
+	
+	if (flag == 0) {
+		QMessageBox::information(this, tr("删除操作失败"),
+                              tr("没找到您选择了哪一行哎～～</p>请您删除前先选择一行好吗？"));
+		return;
+	}
+
+	int choose = QMessageBox::question(this, tr("数据删除确认"),
+                      	      tr("<H3>您确认要把当前选中行删除并提交到数据库吗？</H3>"
+					"<p><font color=red>* 注意此操作不可逆！</font>"),
+				QMessageBox::Yes | QMessageBox::No);
+
+	if (choose == QMessageBox::Yes) {
+		sqlModel->removeRow(view->currentIndex().row());
+		commitToDatabase();
+	}
 }
 
 void NewJoinWidget::refresh()

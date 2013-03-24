@@ -42,11 +42,13 @@ public slots:
 	void submitDataChange();
 	void addInfo();
 	void changeInfo();
+	void delInfo();
 	void refresh();
 
 private:
 	void createUserItem();
 	void createSqlTableModel();
+	void commitToDatabase();
 
 private:
 	QTableView *view;
