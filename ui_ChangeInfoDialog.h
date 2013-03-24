@@ -14,7 +14,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QComboBox>
-#include <QtGui/QDateEdit>
 #include <QtGui/QDialog>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QFormLayout>
@@ -40,7 +39,6 @@ public:
     QLabel *label_4;
     QLineEdit *classEdit;
     QLabel *label_5;
-    QDateEdit *birthdayEdit;
     QLabel *label_6;
     QLineEdit *qqEdit;
     QLabel *label_7;
@@ -56,6 +54,7 @@ public:
     QLabel *label_12;
     QTextEdit *otherinfoEdit;
     QDialogButtonBox *buttonBox;
+    QLineEdit *birthdayEdit;
 
     void setupUi(QDialog *ChangeInfoDialog)
     {
@@ -110,11 +109,6 @@ public:
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         gridLayout->addWidget(label_5, 1, 2, 1, 1);
-
-        birthdayEdit = new QDateEdit(ChangeInfoDialog);
-        birthdayEdit->setObjectName(QString::fromUtf8("birthdayEdit"));
-
-        gridLayout->addWidget(birthdayEdit, 1, 3, 1, 1);
 
         label_6 = new QLabel(ChangeInfoDialog);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -193,6 +187,11 @@ public:
 
         gridLayout->addWidget(buttonBox, 6, 4, 1, 2);
 
+        birthdayEdit = new QLineEdit(ChangeInfoDialog);
+        birthdayEdit->setObjectName(QString::fromUtf8("birthdayEdit"));
+
+        gridLayout->addWidget(birthdayEdit, 1, 3, 1, 1);
+
 
         formLayout->setLayout(0, QFormLayout::LabelRole, gridLayout);
 
@@ -207,7 +206,7 @@ public:
     void retranslateUi(QDialog *ChangeInfoDialog)
     {
         ChangeInfoDialog->setWindowTitle(QApplication::translate("ChangeInfoDialog", "\346\210\220\345\221\230\344\277\241\346\201\257\347\274\226\350\276\221", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("ChangeInfoDialog", "I D", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("ChangeInfoDialog", "\345\255\246\345\217\267 ", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("ChangeInfoDialog", "\345\247\223\345\220\215", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("ChangeInfoDialog", "\346\200\247\345\210\253", 0, QApplication::UnicodeUTF8));
         sexComboBox->clear();

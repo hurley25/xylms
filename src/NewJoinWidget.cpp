@@ -20,27 +20,13 @@
 #include "NewJoinWidget.h"
 #include "SqlTableModel.h"
 #include "ChangeInfoDialog.h"
-
-enum {
-	stu_id          = 0,
-	stu_name        = 1,
-	stu_sex         = 2,
-	stu_class       = 3,
-	stu_birthday    = 4,
-	stu_qq          = 5,
-	stu_phone1      = 6,
-	stu_phone2      = 7,
-	stu_mail        = 8,
-	stu_blog        = 9,
-	stu_where_to_go = 10,
-	stu_other_info  = 11
-};
+#include "xylms.h"
 
 NewJoinWidget::NewJoinWidget()
 {
 	sqlModel = new SqlTableModel();
 	
-	//TODO
+	//TODO 修改默认表功能
 	sqlModel->setTable("stu_2006");
 	createSqlTableModel();
 	sqlModel->select();
@@ -211,14 +197,49 @@ void NewJoinWidget::addInfo()
 {
 	ChangeInfoDialog changeInfoDialog;
 	
-	changeInfoDialog.exec();
+	if (changeInfoDialog.exec() == QDialog::QDialog::Rejected) {
+		return;
+	}
+
+	// TODO
 }
 
 void NewJoinWidget::changeInfo()
 {
-	ChangeInfoDialog changeInfoDialog;
+	int flag = view->currentIndex().column();
 	
-	changeInfoDialog.exec();
+	if (flag == 0) {
+		QMessageBox::information(this, tr("修改操作失败"),
+                              tr("没找到您选择了哪一行哎～～<p>请您先选择待修改的行好吗？"));
+		return;
+	}	
+	
+	int rowNum = view->currentIndex().row();
+
+	ChangeInfoDialog changeInfoDialog(sqlModel, rowNum);
+	
+	if (changeInfoDialog.exec() == QDialog::QDialog::Rejected) {
+		return;
+	}
+
+	sqlModel->setData(sqlModel->index(rowNum, stu_id), QVariant(changeInfoDialog.idEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_name), QVariant(changeInfoDialog.nameEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_sex), 
+			QVariant(changeInfoDialog.sexComboBox->itemText(changeInfoDialog.sexComboBox->currentIndex())));
+	sqlModel->setData(sqlModel->index(rowNum, stu_class), QVariant(changeInfoDialog.classEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_birthday), QVariant(changeInfoDialog.birthdayEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_qq), QVariant(changeInfoDialog.qqEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_phone1), QVariant(changeInfoDialog.phone1Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_phone2), QVariant(changeInfoDialog.phone2Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_mail), QVariant(changeInfoDialog.mailEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_blog), QVariant(changeInfoDialog.blogEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_where_to_go), QVariant(changeInfoDialog.wheretogoEdit->text()));
+//	sqlModel->setData(sqlModel->index(rowNum, stu_other_info), QVariant(changeInfoDialog.otherinfoEdit->text()));
+
+	commitToDatabase();
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
 }
 
 void NewJoinWidget::delInfo()
@@ -227,7 +248,7 @@ void NewJoinWidget::delInfo()
 	
 	if (flag == 0) {
 		QMessageBox::information(this, tr("删除操作失败"),
-                              tr("没找到您选择了哪一行哎～～</p>请您删除前先选择一行好吗？"));
+                              tr("没找到您选择了哪一行哎～～<p>请您前先选择带删除的行好吗？"));
 		return;
 	}
 

@@ -21,13 +21,22 @@
 
 #include "ui_ChangeInfoDialog.h"
 
+class SqlTableModel;
+
 class ChangeInfoDialog : public QDialog, public Ui::ChangeInfoDialog
 {
 	Q_OBJECT
 
 public:
 	ChangeInfoDialog(QWidget *parent = 0);
+	ChangeInfoDialog(SqlTableModel *sqlModel, int index, QWidget *parent = 0);
 	~ChangeInfoDialog();
+
+	void setSqlTableModel(SqlTableModel *sqlModel);
+	void setRegExp();
+
+private:
+	SqlTableModel *sqlModel;
 };
 
 #endif // CHANGEINFODIALOG_H_
