@@ -27,6 +27,7 @@ class QComboBox;
 class QPushButton;
 class QHBoxLayout;
 class QVBoxLayout;
+class QCheckBox;
 
 class NewJoinWidget : public QWidget
 {
@@ -37,27 +38,40 @@ public:
 	~NewJoinWidget();
 
 public slots:
+	void setSeniorButtonState(int flag);
+	void commitDataChange();
+	void restoreDataChange();
 	void addInfo();
 	void changeInfo();
 	void refresh();
 
 private:
+	void createUserItem();
 	void createSqlTableModel();
 
 private:
 	QTreeView *treeView;
 	QHeaderView *headView;
 	SqlTableModel *sqlModel; 
-		
-	QGroupBox   *stuGroupBox;	
-	QComboBox   *stuComboBox;
+	
+	// 浏览数据组
+	QGroupBox   *stuGroupBox;
 	QVBoxLayout *stuLayout;
+	QComboBox   *stuComboBox;
 
 	QPushButton *addButton;
 	QPushButton *changeButton;
 	QPushButton *delButton;
 	QPushButton *refreshButton;
 	
+	// 高级选项组
+	QGroupBox   *seniorGroupBox;
+	QVBoxLayout *seniorLayout;
+	QCheckBox   *seniorCheckBox;
+	QPushButton *commitButton;
+	QPushButton *restoreButton;
+	
+	// 数据操作组
 	QGroupBox   *buttonGroupBox;
 	QVBoxLayout *buttonLayout;
 

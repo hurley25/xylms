@@ -39,6 +39,8 @@ enum {
 NewJoinWidget::NewJoinWidget()
 {
 	sqlModel = new SqlTableModel();
+	
+	//TODO
 	sqlModel->setTable("stu_2006");
 	createSqlTableModel();
 	sqlModel->select();
@@ -54,9 +56,21 @@ NewJoinWidget::NewJoinWidget()
 	treeView->setModel(sqlModel);
 	treeView->setHeader(headView);
 	
-	// 不允许用户编辑数据
+	// 默认不允许用户编辑数据
 	treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	
+	// 建立数据操作按钮
+	createUserItem();
+}
+
+NewJoinWidget::~NewJoinWidget()
+{
+
+}
+
+void NewJoinWidget::createUserItem()
+{
+	// TODO 数据表列表	
 	stuComboBox = new QComboBox();
 	stuComboBox->addItem("2006级信息");
 	stuComboBox->addItem("2007级信息");
@@ -65,22 +79,41 @@ NewJoinWidget::NewJoinWidget()
 	stuComboBox->addItem("2010级信息");
 	stuComboBox->addItem("2011级信息");
 	stuComboBox->addItem("2012级信息");
-
-	// TODO
 	stuComboBox->setCurrentIndex(0);
 	connect(stuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh()));
 	
 	stuLayout = new QVBoxLayout();
 	stuLayout->addWidget(stuComboBox);
-
+	
+	// 组装数据浏览 GroupBox
 	stuGroupBox = new QGroupBox(tr("当前显示"));
 	stuGroupBox->setLayout(stuLayout);
+	
+	seniorCheckBox = new QCheckBox(tr("启用自由编辑"));
+	connect(seniorCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeniorButtonState(int)));
+	commitButton = new QPushButton(tr("提交修改"));;
+	commitButton->setEnabled(false);	
+	connect(commitButton, SIGNAL(clicked()), this, SLOT(commitDataChange()));
+	restoreButton = new QPushButton(tr("修改还原"));;
+	restoreButton->setEnabled(false);
+	connect(restoreButton, SIGNAL(clicked()), this, SLOT(restoreDataChange()));
+
+	seniorLayout = new QVBoxLayout();
+	seniorLayout->addWidget(seniorCheckBox);
+	seniorLayout->addWidget(commitButton);
+	seniorLayout->addWidget(restoreButton);
+	
+	// TODO 组装高级操作选项的 GroupBox
+	seniorGroupBox = new QGroupBox(tr("高级操作"));
+	seniorGroupBox->setLayout(seniorLayout);
 
 	addButton = new QPushButton(tr("增加成员"));
 	connect(addButton, SIGNAL(clicked()), this, SLOT(addInfo()));
 	changeButton = new QPushButton(tr("修改选中"));
+	changeButton->setEnabled(false);
 	connect(changeButton, SIGNAL(clicked()), this, SLOT(changeInfo()));
 	delButton = new QPushButton(tr("删除选中"));
+	delButton->setEnabled(false);
 	refreshButton = new QPushButton(tr("刷新数据"));
 	connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
 
@@ -92,15 +125,20 @@ NewJoinWidget::NewJoinWidget()
 	buttonLayout->addWidget(delButton);
 	buttonLayout->addStretch();
 	buttonLayout->addWidget(refreshButton);
-
+	
+	// 组装数据操作 GroupBox
 	buttonGroupBox = new QGroupBox(tr("数据操作"));
 	buttonGroupBox->setLayout(buttonLayout);
-
+	
+	// 组装主显示右侧的 Layout
 	rightLayout = new QVBoxLayout();
 	rightLayout->addWidget(stuGroupBox);
 	rightLayout->addStretch();
+	rightLayout->addWidget(seniorGroupBox);
+	rightLayout->addStretch();
 	rightLayout->addWidget(buttonGroupBox);
-
+	
+	// 组装主显示的 Layout
 	mainLayout = new QHBoxLayout();
 	mainLayout->addWidget(treeView);
 	mainLayout->addLayout(rightLayout);
@@ -125,6 +163,29 @@ void NewJoinWidget::createSqlTableModel()
 	sqlModel->setHeaderData(stu_blog, Qt::Horizontal, tr("博客"));
 	sqlModel->setHeaderData(stu_where_to_go, Qt::Horizontal, tr("去向"));
 	sqlModel->setHeaderData(stu_other_info, Qt::Horizontal, tr("备注信息"));
+}
+
+void NewJoinWidget::setSeniorButtonState(int flag)
+{
+	if (flag == Qt::Checked) {
+		treeView->setEditTriggers(QAbstractItemView::DoubleClicked);
+		commitButton->setEnabled(true);
+		restoreButton->setEnabled(true);
+	} else {
+		treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+		commitButton->setEnabled(false);
+		restoreButton->setEnabled(false);
+	}
+}
+
+void NewJoinWidget::commitDataChange()
+{
+
+}
+
+void NewJoinWidget::restoreDataChange()
+{
+
 }
 
 void NewJoinWidget::addInfo()
@@ -157,7 +218,3 @@ void NewJoinWidget::refresh()
 	sqlModel->select();
 }
 
-NewJoinWidget::~NewJoinWidget()
-{
-
-}
