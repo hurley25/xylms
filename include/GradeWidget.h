@@ -21,14 +21,49 @@
 
 #include "ui_GradeWidget.h"
 
+class QToolBar;
+class QAction;
+
 class GradeWidget : public QWidget, public Ui::GradeWidget
 {
+	Q_OBJECT
+
 public:
 	GradeWidget();
 	~GradeWidget();
 
+private slots:
+	void findUser();
+	void reset();
+	void setButtonEnable(QString str);
+
+	void setAPlus();
+	void setA();
+	void setAMinus();
+	void setBPlus();
+	void setB();
+	void setBMinus();
+	void setCPlus();
+	void setC();
+	void setCMinus();
+	void setD();
+
 private:
 
+	void createAction();
+
+	QToolBar *toolBar;
+
+	QAction *aPlusAction;
+	QAction *aAction;
+	QAction *aMinusAction;
+	QAction *bPlusAction;
+	QAction *bAction;
+	QAction *bMinusAction;
+	QAction *cPlusAction;
+	QAction *cAction;
+	QAction *cMinusAction;
+	QAction *dAction;
 };
 
 #endif // GRADEWIDGET_H_

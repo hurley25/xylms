@@ -177,7 +177,7 @@ void NewJoinWidget::commitToDatabase()
 	} else {
 		sqlModel->database().rollback();	// 失败则回滚修改
 		QMessageBox::warning(this, tr("数据修改提交错误"),
-                              tr("数据库报告了一个错误: %1，本次所有修改已回滚，点击刷新按钮重置显示。")
+                              tr("数据库报告了一个错误: %1 <p>本次所有修改已回滚，点击刷新按钮重置显示。")
                               .arg(sqlModel->lastError().text()));
 	}
 }
@@ -192,6 +192,9 @@ void NewJoinWidget::submitDataChange()
 	if (choose == QMessageBox::Yes) {
 		commitToDatabase();
 	}
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
 }
 
 void NewJoinWidget::addInfo()

@@ -32,3 +32,4 @@ SOURCES +=  src/main.cpp src/MainWindow.cpp src/StackedWidget.cpp src/xylms.cpp 
 FORMS += ui/ChangeInfoDialog.ui ui/GradeWidget.ui
 
 RESOURCES += xylms.qrc
+

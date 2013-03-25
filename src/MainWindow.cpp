@@ -176,12 +176,15 @@ void MainWindow::createToolBars()
 
 void MainWindow::createManageToolBars()
 {
+	seniorToolBar->removeAction(provingAction);	
+	seniorToolBar->addAction(manageAction);
+	seniorToolBar->addAction(setAction);
+	
 	provingAction->setIcon(QIcon(":/res/images/proving_out.png"));
 	provingAction->setText(tr("管理登出"));
 	provingAction->setStatusTip(tr("超级管理员登出"));
-	
-	seniorToolBar->addAction(manageAction);
-	seniorToolBar->addAction(setAction);
+
+	seniorToolBar->addAction(provingAction);
 }
 
 void MainWindow::removeManageToolBars()
