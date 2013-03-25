@@ -18,6 +18,7 @@
 
 #include "MainWindow.h"
 #include "StackedWidget.h"
+#include "xylms.h"
 
 MainWindow::MainWindow()
 {
@@ -48,7 +49,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::newJoin()
 {
-	stackedWidget->setCurrentIndex(0);
+	stackedWidget->setCurrentIndex(widget_new_join);
+}
+
+void MainWindow::grade()
+{
+	stackedWidget->setCurrentIndex(widget_grade);
 }
 
 void MainWindow::proving()
@@ -83,6 +89,17 @@ void MainWindow::proving()
 	}
 }
 
+
+void MainWindow::manage()
+{
+	stackedWidget->setCurrentIndex(widget_manage);
+}
+
+void MainWindow::set()
+{
+	stackedWidget->setCurrentIndex(widget_set);
+}
+
 void MainWindow::about()
 {
 	QMessageBox::about(this, tr("关于"),
@@ -109,7 +126,7 @@ void MainWindow::createActions()
 	gradeAction = new QAction(tr("面试打分"), this);
 	gradeAction->setIcon(QIcon(":/res/images/grade.png"));
 	gradeAction->setStatusTip(tr("面试打分"));
-	//connect(gradeAction, SIGNAL(triggered()), this, SLOT(grade()));
+	connect(gradeAction, SIGNAL(triggered()), this, SLOT(grade()));
 	
 	provingAction = new QAction(tr("管理登陆"), this);
 	provingAction->setIcon(QIcon(":/res/images/proving_in.png"));
@@ -119,12 +136,12 @@ void MainWindow::createActions()
 	manageAction = new QAction(tr("成员管理"), this);
 	manageAction->setIcon(QIcon(":/res/images/manage.png"));
 	manageAction->setStatusTip(tr("成员数据的管理"));
-	//connect(manageAction, SIGNAL(triggered()), this, SLOT(manage()));
+	connect(manageAction, SIGNAL(triggered()), this, SLOT(manage()));
 	
 	setAction = new QAction(tr("系统设置"), this);
 	setAction->setIcon(QIcon(":/res/images/set.png"));
 	setAction->setStatusTip(tr("系统设置"));
-	//connect(setAction, SIGNAL(triggered()), this, SLOT(set()));
+	connect(setAction, SIGNAL(triggered()), this, SLOT(set()));
 
 	aboutAction = new QAction(tr("关于程序"), this);
 	aboutAction->setIcon(QIcon(":/res/images/about.png"));

@@ -33,6 +33,14 @@ enum {
 	stu_other_info  = 11
 };
 
+// 主窗口列表控件的枚举定义
+enum {
+	widget_new_join = 0,
+	widget_grade    = 1,
+	widget_manage   = 2,
+	widget_set      = 3
+};
+
 // 延时函数
 void Sleep(unsigned int msec);
 

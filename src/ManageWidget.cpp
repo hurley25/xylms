@@ -14,11 +14,24 @@
 // 
 // =====================================================================================
 
+#include <QtGui>
+#include <QtSql>
+
 #include "ManageWidget.h"
+#include "NewJoinWidget.h"
 
-ManageWidget::ManageWidget()
+ManageWidget::ManageWidget() : NewJoinWidget()
 {
-
+	// TODO
+	stuComboBox->clear();	
+	stuComboBox->addItem("2006级信息");
+	stuComboBox->addItem("2007级信息");
+	stuComboBox->addItem("2008级信息");
+	stuComboBox->addItem("2009级信息");
+	stuComboBox->addItem("2010级信息");
+	stuComboBox->addItem("2011级信息");
+	stuComboBox->addItem("2012级信息");
+	stuComboBox->setEnabled(true);
 }
 
 ManageWidget::~ManageWidget()

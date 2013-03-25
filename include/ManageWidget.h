@@ -19,7 +19,9 @@
 
 #include <QWidget>
 
-class ManageWidget : public QWidget
+#include "NewJoinWidget.h"
+
+class ManageWidget : public NewJoinWidget
 {
 public:
 	ManageWidget();

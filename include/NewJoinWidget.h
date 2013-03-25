@@ -46,13 +46,13 @@ public slots:
 	void delInfo();
 	void refresh();
 
-private:
-	void createUserItem();
+protected:	
 	void createSqlTableModel();
+	void createView();
+	void createUserItem();
 	void changeRowInfo(ChangeInfoDialog &changeInfoDialog, int rowNum);
 	void commitToDatabase();
 
-private:
 	QTableView *view;
 	SqlTableModel *sqlModel; 
 	

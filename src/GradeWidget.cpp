@@ -18,7 +18,7 @@
 
 GradeWidget::GradeWidget()
 {
-
+	setupUi(this);
 }
 
 GradeWidget::~GradeWidget()

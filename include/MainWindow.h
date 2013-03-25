@@ -47,7 +47,10 @@ protected:
 
 private slots:
 	void newJoin();
+	void grade();
 	void proving();
+	void manage();
+	void set();
 	void about();
 
 private:

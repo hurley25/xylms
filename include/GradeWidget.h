@@ -19,7 +19,9 @@
 
 #include <QWidget>
 
-class GradeWidget : public QWidget
+#include "ui_GradeWidget.h"
+
+class GradeWidget : public QWidget, public Ui::GradeWidget
 {
 public:
 	GradeWidget();

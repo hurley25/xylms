@@ -29,6 +29,6 @@ SOURCES +=  src/main.cpp src/MainWindow.cpp src/StackedWidget.cpp src/xylms.cpp 
 		src/NewJoinWidget.cpp src/GradeWidget.cpp src/ManageWidget.cpp src/SetWidget.cpp \
 		src/SqlTableModel.cpp src/ChangeInfoDialog.cpp
 
-FORMS += ui/ChangeInfoDialog.ui
+FORMS += ui/ChangeInfoDialog.ui ui/GradeWidget.ui
 
 RESOURCES += xylms.qrc

@@ -33,6 +33,12 @@ StackedWidget::StackedWidget()
 	this->addWidget(gradeWidget);
 	this->addWidget(manageWidget);
 	this->addWidget(setWidget);
+	
+	//QTextStream cout(stdout, QIODevice::WriteOnly);
+	//cout << indexOf(newJoinWidget) << endl;
+	//cout << indexOf(gradeWidget) << endl;
+	//cout << indexOf(manageWidget) << endl;
+	//cout << indexOf(setWidget) << endl;
 }
 
 StackedWidget::~StackedWidget()

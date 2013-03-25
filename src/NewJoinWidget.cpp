@@ -27,24 +27,12 @@ NewJoinWidget::NewJoinWidget()
 	sqlModel = new SqlTableModel();
 	
 	//TODO 修改默认表功能
-	sqlModel->setTable("stu_2006");
+	sqlModel->setTable("stu_2012");
 	createSqlTableModel();
 	sqlModel->select();
 
-	view = new QTableView();
-	view->setModel(sqlModel);
-
-	// 只允许单选
-	view->setSelectionMode(QAbstractItemView::SingleSelection);
-
-	// 每次选中一行
-	view->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-	// 按照显示内容重新调整列宽度
-	view->resizeColumnsToContents();
-	
-	// 默认不允许用户编辑数据
-	view->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	// 创建显示模式
+	createView();
 	
 	// 建立数据操作按钮
 	createUserItem();
@@ -70,18 +58,31 @@ NewJoinWidget::~NewJoinWidget()
 
 }
 
+void NewJoinWidget::createView()
+{
+	view = new QTableView();
+	view->setModel(sqlModel);
+
+	// 只允许单选
+	view->setSelectionMode(QAbstractItemView::SingleSelection);
+
+	// 每次选中一行
+	view->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
+	
+	// 默认不允许用户编辑数据
+	view->setEditTriggers(QAbstractItemView::NoEditTriggers);
+}
+
 void NewJoinWidget::createUserItem()
 {
-	// TODO 数据表列表	
+	// TODO 数据表列表
 	stuComboBox = new QComboBox();
-	stuComboBox->addItem("2006级信息");
-	stuComboBox->addItem("2007级信息");
-	stuComboBox->addItem("2008级信息");
-	stuComboBox->addItem("2009级信息");
-	stuComboBox->addItem("2010级信息");
-	stuComboBox->addItem("2011级信息");
 	stuComboBox->addItem("2012级信息");
 	stuComboBox->setCurrentIndex(0);
+	stuComboBox->setEnabled(false);
 	connect(stuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh()));
 	
 	stuLayout = new QVBoxLayout();
@@ -93,10 +94,10 @@ void NewJoinWidget::createUserItem()
 	
 	seniorCheckBox = new QCheckBox(tr("启用自由编辑"));
 	connect(seniorCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeniorButtonState(int)));
-	submitButton = new QPushButton(tr("提交修改"));;
+	submitButton = new QPushButton(tr("提交修改"));
 	submitButton->setEnabled(false);
 	connect(submitButton, SIGNAL(clicked()), this, SLOT(submitDataChange()));
-	restoreButton = new QPushButton(tr("撤销修改"));;
+	restoreButton = new QPushButton(tr("撤销修改"));
 	restoreButton->setEnabled(false);
 	connect(restoreButton, SIGNAL(clicked()), sqlModel, SLOT(revertAll()));
 
@@ -195,12 +196,15 @@ void NewJoinWidget::submitDataChange()
 
 void NewJoinWidget::addInfo()
 {
+	refresh();
+	
 	int rowNum = sqlModel->rowCount();	// 获得表的行数
 	sqlModel->insertRow(rowNum);		// 新插入行的位置就是表的行数，因为插入位置从 0 开始计算
 
 	ChangeInfoDialog changeInfoDialog(sqlModel, rowNum);
 	
 	if (changeInfoDialog.exec() == QDialog::QDialog::Rejected) {
+		refresh();
 		return;
 	}
 	
@@ -213,6 +217,8 @@ void NewJoinWidget::addInfo()
 
 void NewJoinWidget::changeInfo()
 {
+	refresh();
+	
 	int flag = view->currentIndex().column();
 	
 	if (flag == 0) {
@@ -236,25 +242,10 @@ void NewJoinWidget::changeInfo()
 	view->resizeColumnsToContents();
 }
 
-void NewJoinWidget::changeRowInfo(ChangeInfoDialog &changeInfoDialog, int rowNum)
-{
-	sqlModel->setData(sqlModel->index(rowNum, stu_id), QVariant(changeInfoDialog.idEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_name), QVariant(changeInfoDialog.nameEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_sex), 
-			QVariant(changeInfoDialog.sexComboBox->itemText(changeInfoDialog.sexComboBox->currentIndex())));
-	sqlModel->setData(sqlModel->index(rowNum, stu_class), QVariant(changeInfoDialog.classEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_birthday), QVariant(changeInfoDialog.birthdayEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_qq), QVariant(changeInfoDialog.qqEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_phone1), QVariant(changeInfoDialog.phone1Edit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_phone2), QVariant(changeInfoDialog.phone2Edit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_mail), QVariant(changeInfoDialog.mailEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_blog), QVariant(changeInfoDialog.blogEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_where_to_go), QVariant(changeInfoDialog.wheretogoEdit->text()));
-	sqlModel->setData(sqlModel->index(rowNum, stu_other_info), QVariant(changeInfoDialog.otherinfoEdit->text()));
-}
-
 void NewJoinWidget::delInfo()
 {
+	refresh();	
+	
 	int flag = view->currentIndex().column();
 	
 	if (flag == 0) {
@@ -274,6 +265,23 @@ void NewJoinWidget::delInfo()
 	}
 }
 
+void NewJoinWidget::changeRowInfo(ChangeInfoDialog &changeInfoDialog, int rowNum)
+{
+	sqlModel->setData(sqlModel->index(rowNum, stu_id), QVariant(changeInfoDialog.idEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_name), QVariant(changeInfoDialog.nameEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_sex), 
+			QVariant(changeInfoDialog.sexComboBox->itemText(changeInfoDialog.sexComboBox->currentIndex())));
+	sqlModel->setData(sqlModel->index(rowNum, stu_class), QVariant(changeInfoDialog.classEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_birthday), QVariant(changeInfoDialog.birthdayEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_qq), QVariant(changeInfoDialog.qqEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_phone1), QVariant(changeInfoDialog.phone1Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_phone2), QVariant(changeInfoDialog.phone2Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_mail), QVariant(changeInfoDialog.mailEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_blog), QVariant(changeInfoDialog.blogEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_where_to_go), QVariant(changeInfoDialog.wheretogoEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_other_info), QVariant(changeInfoDialog.otherinfoEdit->text()));
+}
+
 void NewJoinWidget::refresh()
 {
 	QString strTableName("stu_");
@@ -281,9 +289,6 @@ void NewJoinWidget::refresh()
 	
 	// 这个语句在公元9999年以后可能会出 bug ... 
 	strTableName.append(strCombo.mid(0, 4));
-
-	//QTextStream cout(stdout, QIODevice::WriteOnly);
-	//cout << strTableName << endl;;
 	
 	sqlModel->setTable(strTableName);
 	createSqlTableModel();
