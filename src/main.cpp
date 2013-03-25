@@ -35,17 +35,16 @@ int main(int argc, char *argv[])
 
 	translator.load(":/res/language/qt_zh_CN.qm");
 	app.installTranslator(&translator);
-
-	// 添加启动logo
-	QSplashScreen *splash = new QSplashScreen;
-
-	splash->setPixmap(QPixmap(":/res/images/logo.png"));
-	splash->show();
 	
 	// 连接数据库，失败则不启动程序
 	if (!createConnect()) {
 		return 1;
 	}
+	// 添加启动logo
+	QSplashScreen *splash = new QSplashScreen;
+
+	splash->setPixmap(QPixmap(":/res/images/logo.png"));
+	splash->show();
 
 	MainWindow *mainwindow = new MainWindow;
 	
