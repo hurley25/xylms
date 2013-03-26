@@ -9,6 +9,16 @@
     <file>res/images/about.png</file>
     <file>res/images/exit.png</file>
     <file>res/images/logo.png</file>
+    <file>res/images/aPlus.png</file>
+    <file>res/images/a.png</file>
+    <file>res/images/aMinus.png</file>
+    <file>res/images/bPlus.png</file>
+    <file>res/images/b.png</file>
+    <file>res/images/bMinus.png</file>
+    <file>res/images/cPlus.png</file>
+    <file>res/images/c.png</file>
+    <file>res/images/cMinus.png</file>
+    <file>res/images/d.png</file>
     <file>res/language/qt_zh_CN.qm</file>
 </qresource>
 </RCC>

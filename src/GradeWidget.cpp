@@ -53,12 +53,15 @@ GradeWidget::GradeWidget()
 	toolBar->addAction(dAction);
 	toolBar->addSeparator();
 
+	toolBar->setEnabled(false);
+
 	toolLayout->addWidget(toolBar);
 
 	QRegExp idRegExp("[0-9]{8}");
 	idEdit->setValidator(new QRegExpValidator(idRegExp, this));
 
 	findButton->setEnabled(false);
+
 	connect(idEdit, SIGNAL(textChanged(QString)), this, SLOT(setButtonEnable(QString)));
 	connect(findButton, SIGNAL(clicked()), this, SLOT(findUser()));
 	connect(resetButton, SIGNAL(clicked()), this, SLOT(reset()));
@@ -92,7 +95,7 @@ void GradeWidget::createAction()
 	connect(bAction, SIGNAL(triggered()), this, SLOT(setB()));
 
 	bMinusAction = new QAction(tr("B-"), this);
-	bMinusAction->setIcon(QIcon(":/res/images/bMines.png"));
+	bMinusAction->setIcon(QIcon(":/res/images/bMinus.png"));
 	connect(bMinusAction, SIGNAL(triggered()), this, SLOT(setBMinus()));
 	
 	cPlusAction = new QAction(tr("C+"), this);
@@ -129,6 +132,7 @@ void GradeWidget::findUser()
 		nameEdit->setText(query.value(0).toString());
 		sexEdit->setText(query.value(1).toString());
 		classEdit->setText(query.value(2).toString());
+		toolBar->setEnabled(true);
 	}
 }
 
@@ -138,6 +142,7 @@ void GradeWidget::reset()
 	nameEdit->clear();
 	sexEdit->clear();
 	classEdit->clear();
+	toolBar->setEnabled(false);
 }
 
 void GradeWidget::setButtonEnable(QString str)
@@ -147,50 +152,50 @@ void GradeWidget::setButtonEnable(QString str)
 
 void GradeWidget::setAPlus()
 {
-
+	reset();
 }
 
 void GradeWidget::setA()
 {
-
+	reset();
 }
 
 void GradeWidget::setAMinus()
 {
-
+	reset();
 }
 
 void GradeWidget::setBPlus()
 {
-
+	reset();
 }
 
 void GradeWidget::setB()
 {
-
+	reset();
 }
 
 void GradeWidget::setBMinus()
 {
-
+	reset();
 }
 
 void GradeWidget::setCPlus()
 {
-
+	reset();
 }
 
 void GradeWidget::setC()
 {
-
+	reset();
 }
 
 void GradeWidget::setCMinus()
 {
-
+	reset();
 }
 
 void GradeWidget::setD()
 {
-
+	reset();
 }

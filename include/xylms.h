@@ -19,18 +19,19 @@
 
 // 数据表项目位置的枚举定义
 enum {
-	stu_id          = 0,
-	stu_name        = 1,
-	stu_sex         = 2,
-	stu_class       = 3,
-	stu_birthday    = 4,
-	stu_qq          = 5,
-	stu_phone1      = 6,
-	stu_phone2      = 7,
-	stu_mail        = 8,
-	stu_blog        = 9,
-	stu_where_to_go = 10,
-	stu_other_info  = 11
+	stu_num 	= 0,
+	stu_id          = 1,
+	stu_name        = 2,
+	stu_sex         = 3,
+	stu_class       = 4,
+	stu_birthday    = 5,
+	stu_qq          = 6,
+	stu_phone1      = 7,
+	stu_phone2      = 8,
+	stu_mail        = 9,
+	stu_blog        = 10,
+	stu_where_to_go = 11,
+	stu_other_info  = 12
 };
 
 // 主窗口列表控件的枚举定义

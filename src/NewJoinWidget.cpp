@@ -69,6 +69,8 @@ void NewJoinWidget::createView()
 	// 每次选中一行
 	view->setSelectionBehavior(QAbstractItemView::SelectRows);
 
+	view->setColumnHidden(stu_num ,true);
+
 	// 按照显示内容重新调整列宽度
 	view->resizeColumnsToContents();
 	
@@ -179,6 +181,7 @@ void NewJoinWidget::commitToDatabase()
 		QMessageBox::warning(this, tr("数据修改提交错误"),
                               tr("数据库报告了一个错误: %1 <p>本次所有修改已回滚，点击刷新按钮重置显示。")
                               .arg(sqlModel->lastError().text()));
+		refresh();
 	}
 }
 
