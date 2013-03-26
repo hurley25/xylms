@@ -118,7 +118,7 @@ void GradeWidget::createAction()
 void GradeWidget::findUser()
 {
 	// TODO 按照管理员设置填充此处字符串
-	QString strSql = QString("select name, sex, class from stu_%1 where id='%2'").arg("2012").arg(idEdit->text());
+	QString strSql = QString("select name, sex, class, curr_level from stu_%1 where id='%2'").arg("2012").arg(idEdit->text());
 
 	QSqlQuery query(strSql);
 
@@ -132,19 +132,28 @@ void GradeWidget::findUser()
 		nameEdit->setText(query.value(0).toString());
 		sexEdit->setText(query.value(1).toString());
 		classEdit->setText(query.value(2).toString());
-		toolBar->setEnabled(true);
+		nowUserLevel = query.value(3).toInt();
+		setLevelPixMap(nowUserLevel);
 
-		// TODO 按照实际进度修改此处显示		
-		level_1->setPixmap(QPixmap(":/res/images/Pass.png"));
-		level_2->setPixmap(QPixmap(":/res/images/Pass.png"));
-		level_3->setPixmap(QPixmap(":/res/images/Pass.png"));
-		level_4->setPixmap(QPixmap(":/res/images/Pass.png"));
-		level_5->setPixmap(QPixmap(":/res/images/noPass.png"));
-		level_6->setPixmap(QPixmap(":/res/images/noPass.png"));
-		level_7->setPixmap(QPixmap(":/res/images/noPass.png"));
-		level_8->setPixmap(QPixmap(":/res/images/noPass.png"));
-		level_9->setPixmap(QPixmap(":/res/images/noPass.png"));
+		toolBar->setEnabled(true);
 	}
+}
+
+void GradeWidget::setLevelPixMap(int nowLevel)
+{
+	// 其实这里用 QVector 或者数组放置指针，然后使用循环去操作更好
+	// 但是感觉这个思路有意思，而且代码量和上述方法更少且效率更高...
+	switch (nowLevel) {
+		case 9: level_9->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 8: level_8->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 7: level_7->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 6: level_6->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 5: level_5->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 4: level_4->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 3: level_3->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 2: level_2->setPixmap(QPixmap(":/res/images/Pass.png"));
+		case 1: level_1->setPixmap(QPixmap(":/res/images/Pass.png"));
+	}	
 }
 
 void GradeWidget::reset()
@@ -167,12 +176,13 @@ void GradeWidget::reset()
 
 void GradeWidget::setButtonEnable(QString str)
 {
-	findButton->setEnabled(!(str == ""));
+	findButton->setEnabled(!(str.length() == 0));
 }
 
 void GradeWidget::setAPlus()
 {
 	reset();
+	//nowUserLevel
 }
 
 void GradeWidget::setA()

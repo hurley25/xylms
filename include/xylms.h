@@ -31,7 +31,19 @@ enum {
 	stu_mail        = 9,
 	stu_blog        = 10,
 	stu_where_to_go = 11,
-	stu_other_info  = 12
+	stu_other_info  = 12,
+	stu_level_1     = 13,
+	stu_level_2     = 14,
+	stu_level_3     = 15,
+	stu_level_4     = 16,
+	stu_level_5     = 17,
+	stu_level_6     = 18,
+	stu_level_7     = 19,
+	stu_level_8     = 20,
+	stu_level_9     = 21,
+	stu_score       = 22,
+	stu_is_pass     = 23,
+	stu_curr_level  = 24
 };
 
 // 主窗口列表控件的枚举定义

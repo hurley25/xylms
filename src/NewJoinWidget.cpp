@@ -68,8 +68,13 @@ void NewJoinWidget::createView()
 
 	// 每次选中一行
 	view->setSelectionBehavior(QAbstractItemView::SelectRows);
-
+	
+	// 隐藏数据库部分数据
 	view->setColumnHidden(stu_num ,true);
+
+	for (int i = stu_level_1; i < stu_curr_level + 1; i++) {
+		view->setColumnHidden(i ,true);
+	}
 
 	// 按照显示内容重新调整列宽度
 	view->resizeColumnsToContents();

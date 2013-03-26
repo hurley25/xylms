@@ -51,6 +51,9 @@ private slots:
 private:
 
 	void createAction();
+	void setLevelPixMap(int nowLevel);
+
+	int nowUserLevel;
 
 	QToolBar *toolBar;
 

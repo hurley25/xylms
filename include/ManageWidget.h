@@ -26,8 +26,9 @@ class ManageWidget : public NewJoinWidget
 public:
 	ManageWidget();
 	~ManageWidget();
-private:
 
+private:
+	void createScoreView();
 };
 
 #endif // MANAGEWIDGET_H_
