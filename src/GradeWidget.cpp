@@ -20,9 +20,9 @@
 #include "GradeWidget.h"
 
 GradeWidget::GradeWidget()
-{
+{	
 	setupUi(this);
-
+	
 	createAction();
 
 	toolBar = new QToolBar();
@@ -53,9 +53,9 @@ GradeWidget::GradeWidget()
 	toolBar->addAction(dAction);
 	toolBar->addSeparator();
 
-	toolBar->setEnabled(false);
-
 	toolLayout->addWidget(toolBar);
+
+	reset();
 
 	QRegExp idRegExp("[0-9]{8}");
 	idEdit->setValidator(new QRegExpValidator(idRegExp, this));
@@ -133,6 +133,17 @@ void GradeWidget::findUser()
 		sexEdit->setText(query.value(1).toString());
 		classEdit->setText(query.value(2).toString());
 		toolBar->setEnabled(true);
+
+		// TODO 按照实际进度修改此处显示		
+		level_1->setPixmap(QPixmap(":/res/images/Pass.png"));
+		level_2->setPixmap(QPixmap(":/res/images/Pass.png"));
+		level_3->setPixmap(QPixmap(":/res/images/Pass.png"));
+		level_4->setPixmap(QPixmap(":/res/images/Pass.png"));
+		level_5->setPixmap(QPixmap(":/res/images/noPass.png"));
+		level_6->setPixmap(QPixmap(":/res/images/noPass.png"));
+		level_7->setPixmap(QPixmap(":/res/images/noPass.png"));
+		level_8->setPixmap(QPixmap(":/res/images/noPass.png"));
+		level_9->setPixmap(QPixmap(":/res/images/noPass.png"));
 	}
 }
 
@@ -143,6 +154,15 @@ void GradeWidget::reset()
 	sexEdit->clear();
 	classEdit->clear();
 	toolBar->setEnabled(false);
+	level_1->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_2->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_3->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_4->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_5->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_6->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_7->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_8->setPixmap(QPixmap(":/res/images/noPass.png"));
+	level_9->setPixmap(QPixmap(":/res/images/noPass.png"));
 }
 
 void GradeWidget::setButtonEnable(QString str)
