@@ -71,9 +71,17 @@ void MainWindow::proving()
 		QString passwdInput = QInputDialog::getText(this, tr("管理员登陆"), 
 					tr("请输入管理员密码："), QLineEdit::Password, NULL, &isInput);
 		if (isInput) {
+			// 管理员密码验证通过
 			if (passwdInput == passwdRoot) {
 				isRoot = true;
 				createManageToolBars();
+				
+				// TODO
+				QMessageBox::information(this, tr("登录成功"), 
+							tr("登录成功，欢迎大猩猩同学登录～～"));
+
+				// 自动切换到成员管理选项卡
+				stackedWidget->setCurrentIndex(widget_manage);
 			} else {
 				if (++inputCount >= 3) {
 					QMessageBox::warning(this, tr("警告"),

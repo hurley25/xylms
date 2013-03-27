@@ -19,6 +19,8 @@
 
 #include <QWidget>
 
+class QCheckBox;
+
 #include "NewJoinWidget.h"
 
 class ManageWidget : public NewJoinWidget
@@ -27,8 +29,14 @@ public:
 	ManageWidget();
 	~ManageWidget();
 
-private:
+public slots:
+	virtual void refresh();
 	void createScoreView();
+
+private:
+	QCheckBox *hiddenInfoCheckBox;
+	QCheckBox *diaplayScoreCheckBox;
+	QCheckBox *autoRerefreshCheckBox;
 };
 
 #endif // MANAGEWIDGET_H_

@@ -44,7 +44,9 @@ public slots:
 	void addInfo();
 	void changeInfo();
 	void delInfo();
-	void refresh();
+	virtual void refresh();
+	virtual void setDisplayScore(int flag);
+	virtual void setDisplayInfo(int flag);
 
 protected:	
 	void createSqlTableModel();

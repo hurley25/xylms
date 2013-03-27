@@ -69,12 +69,9 @@ void NewJoinWidget::createView()
 	// 每次选中一行
 	view->setSelectionBehavior(QAbstractItemView::SelectRows);
 	
-	// 隐藏数据库部分数据
+	// 隐藏数据库编号和成绩数据
 	view->setColumnHidden(stu_num ,true);
-
-	for (int i = stu_level_1; i < stu_curr_level + 1; i++) {
-		view->setColumnHidden(i ,true);
-	}
+	setDisplayScore(false);
 
 	// 按照显示内容重新调整列宽度
 	view->resizeColumnsToContents();
@@ -113,7 +110,7 @@ void NewJoinWidget::createUserItem()
 	seniorLayout->addWidget(submitButton);
 	seniorLayout->addWidget(restoreButton);
 	
-	// TODO 组装高级操作选项的 GroupBox
+	// 组装高级操作选项的 GroupBox
 	seniorGroupBox = new QGroupBox(tr("高级操作 [请谨慎]"));
 	seniorGroupBox->setLayout(seniorLayout);
 
@@ -309,3 +306,22 @@ void NewJoinWidget::refresh()
 	view->resizeColumnsToContents();
 }
 
+void NewJoinWidget::setDisplayInfo(int flag)
+{
+	for (int i = stu_birthday; i < stu_other_info + 1; i++) {
+		view->setColumnHidden(i, flag);
+	}
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
+}
+
+void NewJoinWidget::setDisplayScore(int flag)
+{		
+	for (int i = stu_level_1; i < stu_curr_level + 1; i++) {
+		view->setColumnHidden(i, !flag);
+	}
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
+}
