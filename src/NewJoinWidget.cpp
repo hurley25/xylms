@@ -250,6 +250,11 @@ void NewJoinWidget::changeInfo()
 	view->resizeColumnsToContents();
 }
 
+void NewJoinWidget::changeScore()
+{
+	
+}
+
 void NewJoinWidget::delInfo()
 {
 	refresh();	
@@ -324,4 +329,11 @@ void NewJoinWidget::setDisplayScore(int flag)
 
 	// 按照显示内容重新调整列宽度
 	view->resizeColumnsToContents();
+}
+
+void NewJoinWidget::AutoRefreshScore(int flag)
+{
+	if (flag == 0) {
+		return;
+	}
 }

@@ -20,6 +20,7 @@
 #include "NewJoinWidget.h"
 #include "ManageWidget.h"
 #include "SqlTableModel.h"
+#include "ChangeScoreDialog.h"
 #include "xylms.h"
 
 ManageWidget::ManageWidget() : NewJoinWidget()
@@ -37,14 +38,21 @@ ManageWidget::ManageWidget() : NewJoinWidget()
 
 	hiddenInfoCheckBox = new QCheckBox(tr("隐藏详细资料"));
 	diaplayScoreCheckBox = new QCheckBox(tr("显示成绩信息"));
-	autoRerefreshCheckBox = new QCheckBox(tr("自动刷新成绩"));
+	autoRefreshCheckBox = new QCheckBox(tr("自动刷新成绩"));
+	changeScoreButton = new QPushButton(tr("修改成绩"));
+
+	autoRefreshTimer = new QTimer(this);
+	connect(autoRefreshTimer, SIGNAL(timeout()), this, SLOT(refresh()));
 
 	connect(hiddenInfoCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayInfo(int)));
 	connect(diaplayScoreCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayScore(int)));
+	connect(autoRefreshCheckBox, SIGNAL(stateChanged(int)), this, SLOT(AutoRefreshScore(int)));
+	connect(changeScoreButton, SIGNAL(clicked()), this, SLOT(changeScore()));
 
 	stuLayout->addWidget(hiddenInfoCheckBox);
 	stuLayout->addWidget(diaplayScoreCheckBox);
-	stuLayout->addWidget(autoRerefreshCheckBox);
+	stuLayout->addWidget(autoRefreshCheckBox);
+	stuLayout->addWidget(changeScoreButton);
 	
 	createScoreView();
 }
@@ -87,5 +95,55 @@ void ManageWidget::refresh()
 
 	// 按照显示内容重新调整列宽度
 	view->resizeColumnsToContents();
+}
+
+void ManageWidget::changeScore()
+{
+	refresh();
+	
+	int flag = view->currentIndex().column();
+	
+	if (flag == 0) {
+		QMessageBox::information(this, tr("修改操作失败"),
+                              tr("没找到您选择了哪一行哎～～<p>请您先选择待修改的行好吗？"));
+		return;
+	}	
+	
+	int rowNum = view->currentIndex().row();
+
+	ChangeScoreDialog changeScoreDialog(sqlModel, rowNum);
+	
+	if (changeScoreDialog.exec() == QDialog::QDialog::Rejected) {
+		return;
+	}
+
+	changeRowScoreInfo(changeScoreDialog, rowNum);
+	commitToDatabase();
+	
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
+}
+
+void ManageWidget::changeRowScoreInfo(ChangeScoreDialog &changeScoreDialog, int rowNum)
+{
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_1), QVariant(changeScoreDialog.level_1_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_2), QVariant(changeScoreDialog.level_2_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_3), QVariant(changeScoreDialog.level_3_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_4), QVariant(changeScoreDialog.level_4_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_5), QVariant(changeScoreDialog.level_5_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_6), QVariant(changeScoreDialog.level_6_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_7), QVariant(changeScoreDialog.level_7_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_8), QVariant(changeScoreDialog.level_8_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_level_9), QVariant(changeScoreDialog.level_9_Edit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_curr_level), QVariant(changeScoreDialog.levelEdit->text()));
+}
+
+void ManageWidget::AutoRefreshScore(int flag)
+{
+	if (flag) {
+		autoRefreshTimer->start(5000);  // 5s 刷新一次
+	} else {
+		autoRefreshTimer->stop();	
+	}
 }
 

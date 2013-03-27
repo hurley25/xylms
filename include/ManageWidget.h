@@ -20,8 +20,12 @@
 #include <QWidget>
 
 class QCheckBox;
+class QPushButton;
+class QTimer;
 
 #include "NewJoinWidget.h"
+
+class ChangeScoreDialog;
 
 class ManageWidget : public NewJoinWidget
 {
@@ -31,12 +35,18 @@ public:
 
 public slots:
 	virtual void refresh();
+	virtual void changeScore();
+	virtual void AutoRefreshScore(int flag);
 	void createScoreView();
+	void changeRowScoreInfo(ChangeScoreDialog &changeInfoDialog, int rowNum);
 
 private:
 	QCheckBox *hiddenInfoCheckBox;
 	QCheckBox *diaplayScoreCheckBox;
-	QCheckBox *autoRerefreshCheckBox;
+	QCheckBox *autoRefreshCheckBox;
+	QPushButton *changeScoreButton;
+
+	QTimer *autoRefreshTimer;
 };
 
 #endif // MANAGEWIDGET_H_

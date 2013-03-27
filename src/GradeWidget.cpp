@@ -55,8 +55,6 @@ GradeWidget::GradeWidget()
 
 	toolLayout->addWidget(toolBar);
 
-	reset();
-
 	QRegExp idRegExp("[0-9]{8}");
 	idEdit->setValidator(new QRegExpValidator(idRegExp, this));
 
@@ -75,6 +73,8 @@ GradeWidget::GradeWidget()
 	levelVector.append(level_7);
 	levelVector.append(level_8);
 	levelVector.append(level_9);
+
+	reset();
 }
 
 GradeWidget::~GradeWidget()
