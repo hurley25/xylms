@@ -54,8 +54,10 @@ private:
 
 	void createAction();
 	void setLevelPixMap(int nowLevel);
+	void commitGrade(int grade);
 
 	int nowUserLevel;
+	QString nowUserID;
 
 	QToolBar *toolBar;
 

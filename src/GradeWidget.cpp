@@ -142,10 +142,16 @@ void GradeWidget::findUser()
 		nameEdit->setText(query.value(0).toString());
 		sexEdit->setText(query.value(1).toString());
 		classEdit->setText(query.value(2).toString());
+	
 		nowUserLevel = query.value(3).toInt();
 		setLevelPixMap(nowUserLevel);
-
-		toolBar->setEnabled(true);
+		nowUserID = idEdit->text();
+		
+		if (nowUserLevel >= 9) {
+			toolBar->setEnabled(false);
+		}else {
+			toolBar->setEnabled(true);
+		}
 	}
 }
 
@@ -195,53 +201,81 @@ void GradeWidget::setButtonEnable(QString str)
 	findButton->setEnabled(!(str.length() == 0));
 }
 
+void GradeWidget::commitGrade(int grade)
+{
+	int choose = QMessageBox::question(this, tr("数据提交确认"),
+                      	      tr("<H3>您确认要把成绩提交到数据库吗？</H3>"
+					"<p><font color=red>* 注意此操作普通用户不可逆。</font>"),
+				QMessageBox::Yes | QMessageBox::No);
+
+	if (choose == QMessageBox::No) {
+		return;
+	}
+	
+	// 增加当前进度，在新的分数槽处打分 TODO
+	nowUserLevel++;
+	QString strSql = QString("update stu_%1 set level_%2 = %3, curr_level = %2"
+		" where id='%4'").arg("2012").arg(nowUserLevel).arg(grade).arg(nowUserID);
+
+	//QTextStream cout(stdout, QIODevice::WriteOnly);
+	//cout << strSql << endl;
+
+	QSqlQuery query(strSql);
+	
+	if (!query.isActive()) {
+		QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
+	} else {
+		QMessageBox::information(this, tr("提交成功"), tr("成绩提交数据库成功！<p>若有修改需求，请求助管理员。"));
+		reset();
+	}
+}
+
 void GradeWidget::setAPlus()
 {
-	reset();
-	//nowUserLevel
+	commitGrade(95);
 }
 
 void GradeWidget::setA()
 {
-	reset();
+	commitGrade(90);
 }
 
 void GradeWidget::setAMinus()
 {
-	reset();
+	commitGrade(85);
 }
 
 void GradeWidget::setBPlus()
 {
-	reset();
+	commitGrade(80);
 }
 
 void GradeWidget::setB()
 {
-	reset();
+	commitGrade(75);
 }
 
 void GradeWidget::setBMinus()
 {
-	reset();
+	commitGrade(70);
 }
 
 void GradeWidget::setCPlus()
 {
-	reset();
+	commitGrade(65);
 }
 
 void GradeWidget::setC()
 {
-	reset();
+	commitGrade(60);
 }
 
 void GradeWidget::setCMinus()
 {
-	reset();
+	commitGrade(55);
 }
 
 void GradeWidget::setD()
 {
-	reset();
+	commitGrade(50);
 }
