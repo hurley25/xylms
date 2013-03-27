@@ -65,6 +65,16 @@ GradeWidget::GradeWidget()
 	connect(idEdit, SIGNAL(textChanged(QString)), this, SLOT(setButtonEnable(QString)));
 	connect(findButton, SIGNAL(clicked()), this, SLOT(findUser()));
 	connect(resetButton, SIGNAL(clicked()), this, SLOT(reset()));
+
+	levelVector.append(level_1);
+	levelVector.append(level_2);
+	levelVector.append(level_3);
+	levelVector.append(level_4);
+	levelVector.append(level_5);
+	levelVector.append(level_6);
+	levelVector.append(level_7);
+	levelVector.append(level_8);
+	levelVector.append(level_9);
 }
 
 GradeWidget::~GradeWidget()
@@ -140,9 +150,22 @@ void GradeWidget::findUser()
 }
 
 void GradeWidget::setLevelPixMap(int nowLevel)
-{
-	// 其实这里用 QVector 或者数组放置指针，然后使用循环去操作更好
-	// 但是感觉这个思路有意思，而且代码量和上述方法更少且效率更高...
+{	
+	// 考虑到移植性，没有在 for 循环内定义 i，
+	// 因为C++标准没有对此种情况下 i 变量的作用域是否可以扩展到循环外做出明确的规定
+
+	int i;
+	for (i = 0; i < nowLevel && i < levelVector.count(); i++) {
+		levelVector[i]->setPixmap(QPixmap(":/res/images/Pass.png"));
+	}
+
+	for (; i < levelVector.count(); i++) {
+		levelVector[i]->setPixmap(QPixmap(":/res/images/noPass.png"));
+	}
+
+	// 其实这里用 QVector 放置指针，然后使用循环实现了
+	// 但是感觉这个思路有意思，所以注释掉留下来
+	/*	
 	switch (nowLevel) {
 		case 9: level_9->setPixmap(QPixmap(":/res/images/Pass.png"));
 		case 8: level_8->setPixmap(QPixmap(":/res/images/Pass.png"));
@@ -153,7 +176,8 @@ void GradeWidget::setLevelPixMap(int nowLevel)
 		case 3: level_3->setPixmap(QPixmap(":/res/images/Pass.png"));
 		case 2: level_2->setPixmap(QPixmap(":/res/images/Pass.png"));
 		case 1: level_1->setPixmap(QPixmap(":/res/images/Pass.png"));
-	}	
+	}
+	*/	
 }
 
 void GradeWidget::reset()
@@ -163,15 +187,7 @@ void GradeWidget::reset()
 	sexEdit->clear();
 	classEdit->clear();
 	toolBar->setEnabled(false);
-	level_1->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_2->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_3->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_4->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_5->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_6->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_7->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_8->setPixmap(QPixmap(":/res/images/noPass.png"));
-	level_9->setPixmap(QPixmap(":/res/images/noPass.png"));
+	setLevelPixMap(0);
 }
 
 void GradeWidget::setButtonEnable(QString str)

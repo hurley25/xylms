@@ -207,6 +207,9 @@ void MainWindow::removeManageToolBars()
 	
 	seniorToolBar->removeAction(manageAction);
 	seniorToolBar->removeAction(setAction);
+
+	// 自动切换到新人录入选项卡
+	stackedWidget->setCurrentIndex(widget_new_join);
 }
 
 void MainWindow::createStatusBar()

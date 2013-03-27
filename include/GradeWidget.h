@@ -18,11 +18,13 @@
 #define GRADEWIDGET_H_
 
 #include <QWidget>
+#include <QVector>
 
 #include "ui_GradeWidget.h"
 
 class QToolBar;
 class QAction;
+class QLabel;
 
 class GradeWidget : public QWidget, public Ui::GradeWidget
 {
@@ -67,6 +69,8 @@ private:
 	QAction *cAction;
 	QAction *cMinusAction;
 	QAction *dAction;
+
+	QVector<QLabel*> levelVector;
 };
 
 #endif // GRADEWIDGET_H_
