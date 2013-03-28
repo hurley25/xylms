@@ -337,3 +337,9 @@ void NewJoinWidget::AutoRefreshScore(int flag)
 		return;
 	}
 }
+
+void NewJoinWidget::sortScore()
+{
+
+}
+

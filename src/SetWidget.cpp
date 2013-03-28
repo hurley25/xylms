@@ -18,7 +18,7 @@
 
 SetWidget::SetWidget()
 {
-
+	setupUi(this);
 }
 
 SetWidget::~SetWidget()

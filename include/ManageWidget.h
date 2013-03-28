@@ -37,6 +37,7 @@ public slots:
 	virtual void refresh();
 	virtual void changeScore();
 	virtual void AutoRefreshScore(int flag);
+	virtual void sortScore();
 	void createScoreView();
 	void changeRowScoreInfo(ChangeScoreDialog &changeInfoDialog, int rowNum);
 
@@ -44,6 +45,7 @@ private:
 	QCheckBox *hiddenInfoCheckBox;
 	QCheckBox *diaplayScoreCheckBox;
 	QCheckBox *autoRefreshCheckBox;
+	QPushButton *sortScoreButton;
 	QPushButton *changeScoreButton;
 
 	QTimer *autoRefreshTimer;

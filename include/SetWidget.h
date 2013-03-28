@@ -19,7 +19,9 @@
 
 #include <QWidget>
 
-class SetWidget : public QWidget
+#include "ui_SetWidget.h"
+
+class SetWidget : public QWidget, public Ui::SetWidget
 {
 public:
 	SetWidget();

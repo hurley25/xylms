@@ -39,6 +39,7 @@ ManageWidget::ManageWidget() : NewJoinWidget()
 	hiddenInfoCheckBox = new QCheckBox(tr("隐藏详细资料"));
 	diaplayScoreCheckBox = new QCheckBox(tr("显示成绩信息"));
 	autoRefreshCheckBox = new QCheckBox(tr("自动刷新成绩"));
+	sortScoreButton = new QPushButton(tr("按照成绩排序"));
 	changeScoreButton = new QPushButton(tr("修改成绩"));
 
 	autoRefreshTimer = new QTimer(this);
@@ -47,11 +48,13 @@ ManageWidget::ManageWidget() : NewJoinWidget()
 	connect(hiddenInfoCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayInfo(int)));
 	connect(diaplayScoreCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayScore(int)));
 	connect(autoRefreshCheckBox, SIGNAL(stateChanged(int)), this, SLOT(AutoRefreshScore(int)));
+	connect(sortScoreButton, SIGNAL(clicked()), this, SLOT(sortScore()));
 	connect(changeScoreButton, SIGNAL(clicked()), this, SLOT(changeScore()));
 
 	stuLayout->addWidget(hiddenInfoCheckBox);
 	stuLayout->addWidget(diaplayScoreCheckBox);
 	stuLayout->addWidget(autoRefreshCheckBox);
+	stuLayout->addWidget(sortScoreButton);
 	stuLayout->addWidget(changeScoreButton);
 	
 	createScoreView();
@@ -145,5 +148,16 @@ void ManageWidget::AutoRefreshScore(int flag)
 	} else {
 		autoRefreshTimer->stop();	
 	}
+}
+
+void ManageWidget::sortScore()
+{
+	refresh();
+	
+	sqlModel->setSort(stu_score, Qt::DescendingOrder);
+	sqlModel->select();
+
+	// 按照显示内容重新调整列宽度
+	view->resizeColumnsToContents();
 }
 

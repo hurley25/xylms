@@ -49,6 +49,7 @@ public slots:
 	virtual void setDisplayInfo(int flag);
 	virtual void AutoRefreshScore(int flag);
 	virtual void changeScore();
+	virtual void sortScore();
 
 protected:	
 	void createSqlTableModel();
