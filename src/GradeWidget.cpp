@@ -18,6 +18,7 @@
 #include <QtSql>
 
 #include "GradeWidget.h"
+#include "xylms.h"
 
 GradeWidget::GradeWidget()
 {	
@@ -128,8 +129,8 @@ void GradeWidget::createAction()
 
 void GradeWidget::findUser()
 {
-	// TODO 按照管理员设置填充此处字符串
-	QString strSql = QString("select name, sex, class, curr_level, remark from stu_%1 where id='%2'").arg("2012").arg(idEdit->text());
+	QString strSql = QString("select name, sex, class, curr_level, remark "
+				"from stu_%1 where id='%2'").arg(settingInfo.userViewYears).arg(idEdit->text());
 
 	QSqlQuery query(strSql);
 
@@ -216,10 +217,10 @@ void GradeWidget::commitGrade(int grade)
 		return;
 	}
 	
-	// 增加当前进度，在新的分数槽处打分 TODO
+	// 增加当前进度，在新的分数槽处打分
 	nowUserLevel++;
 	QString strSql = QString("update stu_%1 set level_%2 = %3, curr_level = %2"
-		" where id='%4'").arg("2012").arg(nowUserLevel).arg(grade).arg(nowUserID);
+		" where id='%4'").arg(settingInfo.userViewYears).arg(nowUserLevel).arg(grade).arg(nowUserID);
 
 	QSqlQuery query(strSql);
 	
@@ -231,9 +232,8 @@ void GradeWidget::commitGrade(int grade)
 
 	//QTextStream cout(stdout, QIODevice::WriteOnly);
 	
-	// TODO
 	QString strScoreSql = QString("select level_1, level_2, level_3, level_4, level_5, level_6, "
-				"level_7, level_8, level_9 from stu_%1 where id = '%2'").arg("2012").arg(nowUserID);
+				"level_7, level_8, level_9 from stu_%1 where id = '%2'").arg(settingInfo.userViewYears).arg(nowUserID);
 
 	QSqlQuery queryScore(strScoreSql);
 	int avgScore = 0;
@@ -251,8 +251,8 @@ void GradeWidget::commitGrade(int grade)
 		
 		avgScore /= i;
 		
-		// TODO
-		QString strAvgSql = QString("update stu_%1 set score = %2 where id = '%3'").arg("2012").arg(avgScore).arg(nowUserID);
+		QString strAvgSql = QString("update stu_%1 set score = %2 "
+					"where id = '%3'").arg(settingInfo.userViewYears).arg(avgScore).arg(nowUserID);
 
 		QSqlQuery queryAvg(strAvgSql);
 		
@@ -267,8 +267,8 @@ void GradeWidget::commitGrade(int grade)
 
 void GradeWidget::remark()
 {
-	// TODO
-	QString strSql = QString("update stu_%1 set remark = '%2' where id = '%3'").arg("2012").arg(remarkEdit->text()).arg(nowUserID);
+	QString strSql = QString("update stu_%1 set remark = '%2' "
+			"where id = '%3'").arg(settingInfo.userViewYears).arg(remarkEdit->text()).arg(nowUserID);
 
 	QSqlQuery query(strSql);
 

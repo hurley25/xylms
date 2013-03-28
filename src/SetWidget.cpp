@@ -19,6 +19,27 @@
 SetWidget::SetWidget()
 {
 	setupUi(this);
+	
+	// TODO
+	yearComboBox->addItem("2006级");
+	yearComboBox->addItem("2007级");
+	yearComboBox->addItem("2008级");
+	yearComboBox->addItem("2009级");
+	yearComboBox->addItem("2010级");
+	yearComboBox->addItem("2011级");
+	yearComboBox->addItem("2012级");
+
+	deleteComboBox->addItem("2006级");
+	deleteComboBox->addItem("2007级");
+	deleteComboBox->addItem("2008级");
+	deleteComboBox->addItem("2009级");
+	deleteComboBox->addItem("2010级");
+	deleteComboBox->addItem("2011级");
+	deleteComboBox->addItem("2012级");
+
+	welcomeEdit->setText(tr(""));
+
+	permissionComboBox->setCurrentIndex(0);
 }
 
 SetWidget::~SetWidget()

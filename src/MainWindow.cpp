@@ -62,23 +62,18 @@ void MainWindow::proving()
 {
 	static bool isRoot = false;
 	static int inputCount;
-	QString passwdRoot("123456");
 	
 	if (isRoot == false) {
-
-		// TODO 从数据库验证密码
 		bool isInput;
 		QString passwdInput = QInputDialog::getText(this, tr("管理员登陆"), 
 					tr("请输入管理员密码："), QLineEdit::Password, NULL, &isInput);
 		if (isInput) {
 			// 管理员密码验证通过
-			if (passwdInput == passwdRoot) {
+			if (passwdInput == settingInfo.rootPasswd) {
 				isRoot = true;
 				createManageToolBars();
 				
-				// TODO
-				QMessageBox::information(this, tr("登录成功"), 
-							tr("登录成功，欢迎大猩猩同学登录～～"));
+				QMessageBox::information(this, tr("登录成功"), settingInfo.rootWelcomeInfo);
 
 				// 自动切换到成员管理选项卡
 				stackedWidget->setCurrentIndex(widget_manage);

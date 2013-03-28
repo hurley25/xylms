@@ -26,8 +26,8 @@ NewJoinWidget::NewJoinWidget()
 {
 	sqlModel = new SqlTableModel();
 	
-	//TODO 修改默认表功能
-	sqlModel->setTable("stu_2012");
+	// 默认显示的数据表
+	sqlModel->setTable("stu_" + settingInfo.userViewYears);
 	createSqlTableModel();
 	sqlModel->select();
 
@@ -82,9 +82,9 @@ void NewJoinWidget::createView()
 
 void NewJoinWidget::createUserItem()
 {
-	// TODO 数据表列表
+	// 数据表列表
 	stuComboBox = new QComboBox();
-	stuComboBox->addItem("2012级信息");
+	stuComboBox->addItem(settingInfo.userViewYears + "级信息");
 	stuComboBox->setCurrentIndex(0);
 	stuComboBox->setEnabled(false);
 	connect(stuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh()));
@@ -122,6 +122,14 @@ void NewJoinWidget::createUserItem()
 	connect(delButton, SIGNAL(clicked()), this, SLOT(delInfo()));
 	refreshButton = new QPushButton(tr("刷新数据"));
 	connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+	
+	// 根据系统设置屏判断是否启用普通用户操作权限
+	if (!settingInfo.userPower) {
+		seniorCheckBox->setEnabled(false);
+		addButton->setEnabled(false);
+		changeButton->setEnabled(false);
+		delButton->setEnabled(false);
+	}
 
 	buttonLayout = new QVBoxLayout();
 	buttonLayout->addWidget(addButton);

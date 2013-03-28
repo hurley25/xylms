@@ -40,6 +40,12 @@ int main(int argc, char *argv[])
 	if (!createConnect()) {
 		return 1;
 	}
+	
+	// 从数据库获取设置信息
+	if (getSystemSetInfo() == false) {
+		return 1;	
+	}
+
 	// 添加启动logo
 	QSplashScreen *splash = new QSplashScreen;
 

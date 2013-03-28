@@ -36,6 +36,11 @@ ManageWidget::ManageWidget() : NewJoinWidget()
 	stuComboBox->addItem("2012级信息");
 	stuComboBox->setEnabled(true);
 
+	seniorCheckBox->setEnabled(true);
+	addButton->setEnabled(true);
+	changeButton->setEnabled(true);
+	delButton->setEnabled(true);
+
 	hiddenInfoCheckBox = new QCheckBox(tr("隐藏详细资料"));
 	diaplayScoreCheckBox = new QCheckBox(tr("显示成绩信息"));
 	autoRefreshCheckBox = new QCheckBox(tr("自动刷新成绩"));

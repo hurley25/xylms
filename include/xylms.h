@@ -17,6 +17,8 @@
 #ifndef XYLMS_H_
 #define XYLMS_H_
 
+#include <QString>
+
 // 数据表项目位置的枚举定义
 enum {
 	stu_num 	= 0,
@@ -54,6 +56,21 @@ enum {
 	widget_manage   = 2,
 	widget_set      = 3
 };
+
+// 系统设置的结构
+struct SettingInfo
+{
+	QString userViewYears;		// 默认显示年份
+	int 	userPower;		// 是否允许普通用户操作
+	QString rootPasswd;		// 管理员密码
+	QString rootWelcomeInfo;	// 管理员欢迎信息
+};
+
+// 全局的系统配置声明
+extern SettingInfo settingInfo;
+
+// 从数据库获取系统设置信息
+bool getSystemSetInfo();
 
 // 延时函数
 void Sleep(unsigned int msec);
