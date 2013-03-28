@@ -195,6 +195,7 @@ void GradeWidget::reset()
 	nameEdit->clear();
 	sexEdit->clear();
 	classEdit->clear();
+	remarkEdit->clear();
 	toolBar->setEnabled(false);
 	setLevelPixMap(0);
 }
