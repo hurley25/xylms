@@ -23,9 +23,19 @@
 
 class SetWidget : public QWidget, public Ui::SetWidget
 {
+	Q_OBJECT
+
 public:
 	SetWidget();
-	~SetWidget();
+
+public slots:
+	void changeUserViewYear();
+	void changeUserPermission(int index);
+	void exportToExcel();
+	void deleteScore();
+	void ChangeWelcomeInfo();
+	void changePass();
+
 private:
 
 };

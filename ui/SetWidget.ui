@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>824</width>
-    <height>526</height>
+    <height>535</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -207,7 +207,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QPushButton" name="deleteButton">
+                <widget class="QPushButton" name="deleteScoreButton">
                  <property name="text">
                   <string>确认删除</string>
                  </property>
