@@ -39,6 +39,8 @@ private slots:
 	void reset();
 	void setButtonEnable(QString str);
 
+	void remark();
+
 	void setAPlus();
 	void setA();
 	void setAMinus();

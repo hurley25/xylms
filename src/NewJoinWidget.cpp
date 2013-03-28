@@ -328,7 +328,7 @@ void NewJoinWidget::setDisplayInfo(int flag)
 
 void NewJoinWidget::setDisplayScore(int flag)
 {		
-	for (int i = stu_level_1; i < stu_curr_level + 1; i++) {
+	for (int i = stu_level_1; i < stu_remark + 1; i++) {
 		view->setColumnHidden(i, !flag);
 	}
 

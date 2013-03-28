@@ -63,6 +63,7 @@ GradeWidget::GradeWidget()
 	connect(idEdit, SIGNAL(textChanged(QString)), this, SLOT(setButtonEnable(QString)));
 	connect(findButton, SIGNAL(clicked()), this, SLOT(findUser()));
 	connect(resetButton, SIGNAL(clicked()), this, SLOT(reset()));
+	connect(remarkButton, SIGNAL(clicked()), this, SLOT(remark()));
 
 	levelVector.append(level_1);
 	levelVector.append(level_2);
@@ -128,7 +129,7 @@ void GradeWidget::createAction()
 void GradeWidget::findUser()
 {
 	// TODO 按照管理员设置填充此处字符串
-	QString strSql = QString("select name, sex, class, curr_level from stu_%1 where id='%2'").arg("2012").arg(idEdit->text());
+	QString strSql = QString("select name, sex, class, curr_level, remark from stu_%1 where id='%2'").arg("2012").arg(idEdit->text());
 
 	QSqlQuery query(strSql);
 
@@ -146,6 +147,8 @@ void GradeWidget::findUser()
 		nowUserLevel = query.value(3).toInt();
 		setLevelPixMap(nowUserLevel);
 		nowUserID = idEdit->text();
+
+		remarkEdit->setText(query.value(4).toString());
 		
 		if (nowUserLevel >= 9) {
 			toolBar->setEnabled(false);
@@ -259,6 +262,20 @@ void GradeWidget::commitGrade(int grade)
 	
 	// 初始化打分界面
 	reset();
+}
+
+void GradeWidget::remark()
+{
+	// TODO
+	QString strSql = QString("update stu_%1 set remark = '%2' where id = '%3'").arg("2012").arg(remarkEdit->text()).arg(nowUserID);
+
+	QSqlQuery query(strSql);
+
+	if (!query.isActive()) {
+		QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
+	} else {
+		QMessageBox::information(this, tr("提交成功"), tr("您的评语修改成功提交到数据库。"));
+	}
 }
 
 void GradeWidget::setAPlus()

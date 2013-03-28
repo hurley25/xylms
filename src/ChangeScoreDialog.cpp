@@ -53,7 +53,8 @@ ChangeScoreDialog::ChangeScoreDialog(SqlTableModel *sqlModel, int index, QWidget
 	level_7_Edit->setText(sqlModel->record(index).value(stu_level_7).toString());
 	level_8_Edit->setText(sqlModel->record(index).value(stu_level_8).toString());
 	level_9_Edit->setText(sqlModel->record(index).value(stu_level_9).toString());
-	
+	remarkEdit->setText(sqlModel->record(index).value(stu_remark).toString());
+
 	// 固定对话框大小，不允许调整
 	this->setFixedSize(this->width(),this->height());
 }

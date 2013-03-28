@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>635</width>
-    <height>216</height>
+    <height>243</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,22 +16,19 @@
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>学号</string>
+        <string>姓名</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>成绩7</string>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="idEdit">
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="level_7_Edit"/>
      </item>
      <item row="4" column="2">
       <widget class="QLabel" name="label_11">
@@ -40,18 +37,56 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="3">
-      <widget class="QLineEdit" name="level_8_Edit"/>
-     </item>
-     <item row="4" column="4">
-      <widget class="QLabel" name="label_12">
+     <item row="2" column="2">
+      <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>成绩9</string>
+        <string>成绩2</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="5">
-      <widget class="QLineEdit" name="level_9_Edit"/>
+     <item row="0" column="3">
+      <widget class="QLineEdit" name="nameEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>成绩1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>成绩6</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="level_4_Edit"/>
+     </item>
+     <item row="0" column="4">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>当前进度</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QLineEdit" name="level_2_Edit"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="level_1_Edit"/>
+     </item>
+     <item row="1" column="3">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
      </item>
      <item row="6" column="4" colspan="2">
       <widget class="QDialogButtonBox" name="buttonBox">
@@ -63,34 +98,6 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="4">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>当前进度</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="idEdit">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>姓名</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QLineEdit" name="nameEdit">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="5">
       <widget class="QLineEdit" name="levelEdit">
        <property name="readOnly">
@@ -98,35 +105,28 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_4">
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_10">
        <property name="text">
-        <string>成绩1</string>
+        <string>成绩7</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_7">
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="level_5_Edit"/>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLineEdit" name="level_8_Edit"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_13">
        <property name="text">
-        <string>成绩4</string>
+        <string>评语</string>
        </property>
       </widget>
-     </item>
-     <item row="2" column="5">
-      <widget class="QLineEdit" name="level_3_Edit"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="level_1_Edit"/>
      </item>
      <item row="3" column="5">
       <widget class="QLineEdit" name="level_6_Edit"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>成绩2</string>
-       </property>
-      </widget>
      </item>
      <item row="2" column="4">
       <widget class="QLabel" name="label_6">
@@ -135,19 +135,30 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="3">
-      <widget class="QLineEdit" name="level_2_Edit"/>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="level_7_Edit"/>
      </item>
-     <item row="3" column="3">
-      <widget class="QLineEdit" name="level_5_Edit"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="level_4_Edit"/>
-     </item>
-     <item row="3" column="4">
-      <widget class="QLabel" name="label_9">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>成绩6</string>
+        <string>成绩4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="5">
+      <widget class="QLineEdit" name="remarkEdit"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>学号</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>成绩9</string>
        </property>
       </widget>
      </item>
@@ -158,19 +169,11 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
+     <item row="4" column="5">
+      <widget class="QLineEdit" name="level_9_Edit"/>
      </item>
-     <item row="5" column="2">
-      <widget class="Line" name="line_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
+     <item row="2" column="5">
+      <widget class="QLineEdit" name="level_3_Edit"/>
      </item>
     </layout>
    </item>

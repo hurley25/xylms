@@ -43,7 +43,8 @@ enum {
 	stu_level_9     = 21,
 	stu_score       = 22,
 	stu_is_pass     = 23,
-	stu_curr_level  = 24
+	stu_curr_level  = 24,
+	stu_remark      = 25
 };
 
 // 主窗口列表控件的枚举定义

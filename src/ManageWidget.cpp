@@ -79,6 +79,7 @@ void ManageWidget::createScoreView()
 	sqlModel->setHeaderData(stu_score, Qt::Horizontal, tr("平均分"));
 	sqlModel->setHeaderData(stu_is_pass, Qt::Horizontal, tr("是否通过"));
 	sqlModel->setHeaderData(stu_curr_level, Qt::Horizontal, tr("当前进度"));
+	sqlModel->setHeaderData(stu_remark, Qt::Horizontal, tr("面试评语"));
 }
 
 void ManageWidget::refresh()
@@ -139,6 +140,7 @@ void ManageWidget::changeRowScoreInfo(ChangeScoreDialog &changeScoreDialog, int 
 	sqlModel->setData(sqlModel->index(rowNum, stu_level_8), QVariant(changeScoreDialog.level_8_Edit->text()));
 	sqlModel->setData(sqlModel->index(rowNum, stu_level_9), QVariant(changeScoreDialog.level_9_Edit->text()));
 	sqlModel->setData(sqlModel->index(rowNum, stu_curr_level), QVariant(changeScoreDialog.levelEdit->text()));
+	sqlModel->setData(sqlModel->index(rowNum, stu_remark), QVariant(changeScoreDialog.remarkEdit->text()));
 }
 
 void ManageWidget::AutoRefreshScore(int flag)
