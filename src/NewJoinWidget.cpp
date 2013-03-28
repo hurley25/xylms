@@ -255,6 +255,11 @@ void NewJoinWidget::changeScore()
 	
 }
 
+void NewJoinWidget::sortScore()
+{
+
+}
+
 void NewJoinWidget::delInfo()
 {
 	refresh();	
@@ -336,10 +341,5 @@ void NewJoinWidget::AutoRefreshScore(int flag)
 	if (flag == 0) {
 		return;
 	}
-}
-
-void NewJoinWidget::sortScore()
-{
-
 }
 

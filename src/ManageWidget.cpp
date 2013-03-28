@@ -43,7 +43,7 @@ ManageWidget::ManageWidget() : NewJoinWidget()
 	changeScoreButton = new QPushButton(tr("修改成绩"));
 
 	autoRefreshTimer = new QTimer(this);
-	connect(autoRefreshTimer, SIGNAL(timeout()), this, SLOT(refresh()));
+	connect(autoRefreshTimer, SIGNAL(timeout()), this, SLOT(sortScore()));
 
 	connect(hiddenInfoCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayInfo(int)));
 	connect(diaplayScoreCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayScore(int)));

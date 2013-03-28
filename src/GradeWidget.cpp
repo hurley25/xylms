@@ -217,17 +217,48 @@ void GradeWidget::commitGrade(int grade)
 	QString strSql = QString("update stu_%1 set level_%2 = %3, curr_level = %2"
 		" where id='%4'").arg("2012").arg(nowUserLevel).arg(grade).arg(nowUserID);
 
-	//QTextStream cout(stdout, QIODevice::WriteOnly);
-	//cout << strSql << endl;
-
 	QSqlQuery query(strSql);
 	
 	if (!query.isActive()) {
 		QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
 	} else {
 		QMessageBox::information(this, tr("提交成功"), tr("成绩提交数据库成功！<p>若有修改需求，请求助管理员。"));
-		reset();
 	}
+
+	//QTextStream cout(stdout, QIODevice::WriteOnly);
+	
+	// TODO
+	QString strScoreSql = QString("select level_1, level_2, level_3, level_4, level_5, level_6, "
+				"level_7, level_8, level_9 from stu_%1 where id = '%2'").arg("2012").arg(nowUserID);
+
+	QSqlQuery queryScore(strScoreSql);
+	int avgScore = 0;
+
+	if (!queryScore.isActive()) {
+		QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
+	} else {
+		// 获取第一条数据（也仅仅只有一条）
+		queryScore.next();
+
+		int i;
+		for ( i = 0; i < 9 && queryScore.value(i).toInt() != 0; i++) {
+			avgScore += queryScore.value(i).toInt();
+		}
+		
+		avgScore /= i;
+		
+		// TODO
+		QString strAvgSql = QString("update stu_%1 set score = %2 where id = '%3'").arg("2012").arg(avgScore).arg(nowUserID);
+
+		QSqlQuery queryAvg(strAvgSql);
+		
+		if (!queryAvg.isActive()) {
+			QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
+		}
+	}
+	
+	// 初始化打分界面
+	reset();
 }
 
 void GradeWidget::setAPlus()
