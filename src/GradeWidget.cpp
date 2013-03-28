@@ -77,6 +77,11 @@ GradeWidget::GradeWidget()
 	levelVector.append(level_9);
 
 	reset();
+
+	// 根据系统设置屏判断是否启用普通用户操作权限
+	if (!settingInfo.userPower) {
+		idEdit->setEnabled(false);
+	}
 }
 
 GradeWidget::~GradeWidget()
