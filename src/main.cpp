@@ -57,12 +57,14 @@ int main(int argc, char *argv[])
 	// sleep 1 s 只是为了显示启动画面...
 	Sleep(1000);
 
+	// 显示主窗口
 	mainwindow->show();
 	
 	// 窗口显示在屏幕正中间
 	mainwindow->move((QApplication::desktop()->width() - mainwindow->width()) >> 1,
 				(QApplication::desktop()->height() - mainwindow->height()) >> 1);
 
+	// 关闭启动画面
 	splash->finish(mainwindow);
 	delete splash;
 

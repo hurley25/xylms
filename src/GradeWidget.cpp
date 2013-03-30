@@ -237,6 +237,7 @@ void GradeWidget::commitGrade(int grade)
 
 	//QTextStream cout(stdout, QIODevice::WriteOnly);
 	
+	// 获取所有已提交的分数
 	QString strScoreSql = QString("select level_1, level_2, level_3, level_4, level_5, level_6, "
 				"level_7, level_8, level_9 from stu_%1 where id = '%2'").arg(settingInfo.userViewYears).arg(nowUserID);
 
@@ -248,7 +249,8 @@ void GradeWidget::commitGrade(int grade)
 	} else {
 		// 获取第一条数据（也仅仅只有一条）
 		queryScore.next();
-
+		
+		// 计算平均分
 		int i;
 		for ( i = 0; i < 9 && queryScore.value(i).toInt() != 0; i++) {
 			avgScore += queryScore.value(i).toInt();
@@ -256,6 +258,7 @@ void GradeWidget::commitGrade(int grade)
 		
 		avgScore /= i;
 		
+		// 提交平均分数
 		QString strAvgSql = QString("update stu_%1 set score = %2 "
 					"where id = '%3'").arg(settingInfo.userViewYears).arg(avgScore).arg(nowUserID);
 
@@ -272,6 +275,7 @@ void GradeWidget::commitGrade(int grade)
 
 void GradeWidget::remark()
 {
+	// 向数据库提交当前成员的评语
 	QString strSql = QString("update stu_%1 set remark = '%2' "
 			"where id = '%3'").arg(settingInfo.userViewYears).arg(remarkEdit->text()).arg(nowUserID);
 

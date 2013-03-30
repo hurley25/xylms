@@ -63,10 +63,12 @@ void MainWindow::proving()
 	static bool isRoot = false;
 	static int inputCount;
 	
+	// 如果当前是管理员登录
 	if (isRoot == false) {
 		bool isInput;
 		QString passwdInput = QInputDialog::getText(this, tr("管理员登陆"), 
 					tr("请输入管理员密码："), QLineEdit::Password, NULL, &isInput);
+		// 如果点击了确定
 		if (isInput) {
 			// 管理员密码验证通过
 			if (passwdInput == settingInfo.rootPasswd) {
@@ -78,6 +80,7 @@ void MainWindow::proving()
 				// 自动切换到成员管理选项卡
 				stackedWidget->setCurrentIndex(widget_manage);
 			} else {
+				// 密码验证错误
 				if (++inputCount >= 3) {
 					QMessageBox::warning(this, tr("警告"),
 							tr("请不要多次尝试管理员密码，这会让组长同志很不开心。"));
@@ -225,5 +228,4 @@ void MainWindow::writeSettings()
 {
 
 }
-
 
