@@ -34,14 +34,24 @@ void Sleep(unsigned int msec)
 bool createConnect()
 {
 	QSqlDatabase db  = QSqlDatabase::addDatabase("QMYSQL");
-
-	db.setHostName("localhost");
+	
+	bool isInput;
+	QString ipInput = QInputDialog::getText(NULL, QObject::tr("连接数据库服务器"), 
+				QObject::tr("请输入数据库服务器IP："), QLineEdit::Normal,
+				QObject::tr("192.168.100.254"), &isInput);
+	
+	if (isInput && !ipInput.isEmpty()) {
+		db.setHostName(ipInput);
+	} else {
+		QMessageBox::critical(NULL, QObject::tr("输入错误"), QObject::tr("服务器IP输入错误，程序即将退出。"));
+		return false;
+	}
 	db.setDatabaseName("xiyoulinux");
 	db.setUserName("root");
-	db.setPassword("610424763x");
+	db.setPassword("xiyou_linux");
 
 	if (!db.open()) {
-		QMessageBox::critical(0, QObject::tr("连接数据库错误"), db.lastError().text());
+		QMessageBox::critical(NULL, QObject::tr("连接数据库错误"), db.lastError().text());
 		return false;
 	}
 	
