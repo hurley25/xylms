@@ -38,7 +38,7 @@ bool createConnect()
 	bool isInput;
 	QString ipInput = QInputDialog::getText(NULL, QObject::tr("连接数据库服务器"), 
 				QObject::tr("请输入数据库服务器IP："), QLineEdit::Normal,
-				QObject::tr("192.168.100.254"), &isInput);
+				QObject::tr("192.168.200.254"), &isInput);
 	
 	if (isInput && !ipInput.isEmpty()) {
 		db.setHostName(ipInput);
