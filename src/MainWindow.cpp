@@ -18,6 +18,8 @@
 
 #include "MainWindow.h"
 #include "StackedWidget.h"
+#include "NewJoinWidget.h"
+#include "ManageWidget.h"
 #include "xylms.h"
 
 MainWindow::MainWindow()
@@ -51,6 +53,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::newJoin()
 {
 	stackedWidget->setCurrentIndex(widget_new_join);
+
+	// 刷新一下显示数据
+	((NewJoinWidget *)(stackedWidget->currentWidget()))->refresh();
 }
 
 void MainWindow::grade()
@@ -100,6 +105,9 @@ void MainWindow::proving()
 void MainWindow::manage()
 {
 	stackedWidget->setCurrentIndex(widget_manage);
+
+	// 刷新一下显示数据
+	((ManageWidget *)(stackedWidget->currentWidget()))->refresh();
 }
 
 void MainWindow::set()
