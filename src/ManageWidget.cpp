@@ -106,6 +106,47 @@ void ManageWidget::refresh()
 	view->resizeColumnsToContents();
 }
 
+void ManageWidget::changeAvgSourse(QString nowUserID)
+{
+	QString strTableName("stu_");
+	QString strCombo = stuComboBox->currentText();
+	
+	// 这个语句在公元9999年以后可能会出 bug ... 
+	strTableName.append(strCombo.mid(0, 4));
+
+	// 获取所有已提交的分数
+	QString strScoreSql = QString("select level_1, level_2, level_3, level_4, level_5, level_6, "
+				"level_7, level_8, level_9 from %1 where id = '%2'").arg(strTableName).arg(nowUserID);
+
+	QSqlQuery queryScore(strScoreSql);
+	int avgScore = 0;
+
+	if (!queryScore.isActive()) {
+		QMessageBox::warning(this, tr("数据库错误"), queryScore.lastError().text());
+	} else {
+		// 获取第一条数据（也仅仅只有一条）
+		queryScore.next();
+		
+		// 计算平均分
+		int i;
+		for ( i = 0; i < 9 && queryScore.value(i).toInt() != 0; i++) {
+			avgScore += queryScore.value(i).toInt();
+		}
+		
+		avgScore /= i;
+		
+		// 提交平均分数
+		QString strAvgSql = QString("update %1 set score = %2 "
+					"where id = '%3'").arg(strTableName).arg(avgScore).arg(nowUserID);
+
+		QSqlQuery queryAvg(strAvgSql);
+		
+		if (!queryAvg.isActive()) {
+			QMessageBox::warning(this, tr("数据库错误"), queryAvg.lastError().text());
+		}
+	}
+}
+
 void ManageWidget::changeScore()
 {
 	refresh();
@@ -128,6 +169,10 @@ void ManageWidget::changeScore()
 
 	changeRowScoreInfo(changeScoreDialog, rowNum);
 	commitToDatabase();
+
+	// 重新计算并修改平均分数
+	changeAvgSourse(sqlModel->record(rowNum).value(stu_id).toString());
+	refresh();	
 	
 	// 按照显示内容重新调整列宽度
 	view->resizeColumnsToContents();

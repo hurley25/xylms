@@ -35,6 +35,7 @@ public:
 
 public slots:
 	virtual void refresh();
+	void changeAvgSourse(QString nowUserID);
 	virtual void changeScore();
 	virtual void AutoRefreshScore(int flag);
 	virtual void sortScore();

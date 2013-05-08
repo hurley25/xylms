@@ -245,7 +245,7 @@ void GradeWidget::commitGrade(int grade)
 	int avgScore = 0;
 
 	if (!queryScore.isActive()) {
-		QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
+		QMessageBox::warning(this, tr("数据库错误"), queryScore.lastError().text());
 	} else {
 		// 获取第一条数据（也仅仅只有一条）
 		queryScore.next();
@@ -265,7 +265,7 @@ void GradeWidget::commitGrade(int grade)
 		QSqlQuery queryAvg(strAvgSql);
 		
 		if (!queryAvg.isActive()) {
-			QMessageBox::warning(this, tr("数据库错误"), query.lastError().text());
+			QMessageBox::warning(this, tr("数据库错误"), queryAvg.lastError().text());
 		}
 	}
 	
