@@ -69,7 +69,7 @@ void ChangeInfoDialog::setRegExp()
 	QRegExp qqRegExp("[0-9]{0,12}");
 	qqEdit->setValidator(new QRegExpValidator(qqRegExp, this));
 	
-	QRegExp phoneRegExp("[0-9]{0,8}");
+	QRegExp phoneRegExp("[0-9]{0,11}");
 	phone1Edit->setValidator(new QRegExpValidator(phoneRegExp, this));
 	phone2Edit->setValidator(new QRegExpValidator(phoneRegExp, this));
 }
