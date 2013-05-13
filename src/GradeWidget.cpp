@@ -256,7 +256,11 @@ void GradeWidget::commitGrade(int grade)
 			avgScore += queryScore.value(i).toInt();
 		}
 		
-		avgScore /= i;
+		if (i == 0) {
+			avgScore = 0;
+		} else {
+			avgScore /= i;
+		}
 		
 		// 提交平均分数
 		QString strAvgSql = QString("update stu_%1 set score = %2 "
